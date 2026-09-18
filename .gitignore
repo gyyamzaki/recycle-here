@@ -1,0 +1,6 @@
+# Váriaveis de ambiente 
+.env
+
+# Arquivos do sistema operacional
+.DS_STORE
+Thumbs.db
