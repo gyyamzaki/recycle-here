@@ -331,5 +331,38 @@ if (pointDetailsPage) {
             `${point.name} | Recycle Here`;
 
     }
+    else {
+
+        const pointInformation =
+            document.querySelector(".point-information");
+
+
+        pointInformation.replaceChildren();
+
+
+        const errorTitle =
+            document.createElement("h1");
+
+        errorTitle.textContent =
+            "Ponto de coleta não encontrado";
+
+
+        const errorMessage =
+            document.createElement("p");
+
+        errorMessage.textContent =
+            "O ponto informado não existe ou não está disponível.";
+
+
+        pointInformation.append(
+            errorTitle,
+            errorMessage
+        );
+
+
+        document.title =
+            "Ponto não encontrado | Recycle Here";
+
+    }
 
 }
