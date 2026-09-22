@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang ="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta 
+        name="viewport" 
+        content="width=device-width, initial-scale=1.0">
+    
+    <title>Recycle Here</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a class="logo" href="#inicio">Recycle Here</a>
+
+        <nav aria-label="Navegação principal">
+            <ul class=""nav-list>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#materiais">Materiais</a></li>
+                <li><a href="#pontos">Pontos de coleta</a></li>
+                <li><a href="#empresas">Para empresas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="inicio">
+
+        <section class="hero" aria-labelledby="hero-title">
+            <h1 id="hero-title">Encontre onde reciclar em Sorocaba</h1>
+
+            <p>
+                Descubre pontos de coleta de acordo com sua região e com o material que deseja descartar.
+            </p>
+
+            <form class="search-form" method="get">
+
+                <div class="form-group">
+                    <label for="bairro">Bairro ou região</label>
+
+                    <input type="text" id="bairro" name="bairro" placeholder="Ex.: Centro" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="material">Material</label>
+
+                    <select id="material" name="material" required>
+                        <option value="">Selecione um material</option>
+                        <option value="papel">Papel</option>
+                        <option value="plastico">Plástico</option>
+                        <option value="vidro">Vidro</option>
+                        <option value="metal">Metal</option>
+                        <option value="eletronicos">Eletrônicos</option>
+                        <option value="pilhas-baterias">Pilhas e baterias</option>
+                        <option value="oleo-usado">Óleo usado</option>
+                    </select>
+                </div>
+
+                <button type="submit">Buscar pontos</button>
+                
+            </form>
+        </section>
+
+        <section class="materials-section" id="materiais" aria-labelledby="materials-title">
+
+            <header class+section-header>
+
+                <h2 id="materials-title">materials</h2>
+
+                <p> Consulte alguns dos principais tipos de materiais e encontre locais adequados para o descarte</p>
+            </header>
+
+            <div class="material-card">
+
+                <article class="material-card">
+                    <h3>Papel</h3>
+                    <p>Papelão, folhas, jornais e outros materiais de papel.</p>
+                </article>
+
+                <article class="material-card">
+                    <h3>Plástico</h3>
+                    <p>Garrafas PET, embalagens, frascos e outros plásticos.</p>
+                </article>
+
+                <article class="material-card">
+                    <h3>Vidro</h3>
+                    <p>Garrafas, potes e outros recipientes de vidro reciclável.</p>
+                </article>
+
+                <article class="material-card">
+                    <h3>Metal</h3>
+                    <p>Latas, peças metálicas e outros materiais de metal.</p>
+                </article>
+
+                <article class="material-card">
+                    <h3>Eletrônicos</h3>
+                    <p>Celulares, computadores, cabos e equipamentos eletrônicos.</p>
+                </article>
+
+                <article class="material-card">
+                    <h3>Pilhas e baterias</h3>
+                    <p>Pilhas domésticas e diferentes tipos de baterias usadas.</p>
+                </article>
+
+                <article class="material-card">
+                    <h3>Óleo usado</h3>
+                    <p>Óleo de cozinha usado que necessita de descarte adequado.</p>
+                </article>
+
+            </div>
+
+        </section>
+
+        <section class="collection-point-section" id="pontos" aria-labelledby="collection points title"> 
+
+            <header class="section-header">
+
+                <h2 id="collection-points-title">Pontos de coleta</h2>
+
+                <p>
+                    Conhecça alguns locais que recebem materiais para reciclagem em Sorocaba
+                </p>
+            </header>
+
+            <div class="collection-points-grid">
+
+                <article collection-point-card>
+
+                    <h3>Cooperativa Recicla Sorocaba</h3>
+
+                    <p>
+                        <strong>Localização</strong>
+                        Centro - Sorocaba
+                    </p>
+
+                    <p> 
+                        <strong>Materiais aceitos</strong>
+                        Papel, plástico e vidro 
+                    </p>
+                    
+                    <a href="#">Ver detalhes</a>
+                </article>
+
+                <article collection-point-card>
+
+                    <h3>Ecoponto Campolim</h3>
+
+                    <p>
+                        <strong>Localização</strong>
+                        Campolim - Sorocaba
+                    </p>
+
+                    <p> 
+                        <strong>Materiais aceitos</strong>
+                        Eletrônicos, pilhas e baterias 
+                    </p>
+                    
+                    <a href="#">Ver detalhes</a>
+                </article>
+
+                <article collection-point-card>
+
+                    <h3>Cooperativa Zona Norte</h3>
+
+                    <p>
+                        <strong>Localização</strong>
+                        Zona Norte - Sorocaba
+                    </p>
+
+                    <p> 
+                        <strong>Materiais aceitos</strong>
+                        Vidro e metal 
+                    </p>
+                    
+                    <a href="#">Ver detalhes</a>
+                </article>
+            </div>
+
+        </section>
+
+        <section class="companies-section" id="empresas" aria-labelledby="companies-title">
+
+            <header class="section-header">
+                <h2 id="companies-title">Você representa uma empresa ou cooperativa?</h2>
+
+                <p>
+                    Cadastre seu ponto de coleta e informe quais materiais
+                    seu estabelecimento recebe.
+                </p>
+            </header>
+
+            <div class="companies-actions">
+                <a href="cadastro.html">Cadastrar empresa</a>
+                <a href="login.html">Área da empresa</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+    <p>Recycle Here</p>
+
+    <nav aria-label="Navegação do rodapé">
+        <ul class="footer-nav">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#pontos">Pontos de coleta</a></li>
+            <li><a href="#materiais">Materiais</a></li>
+            <li><a href="#empresas">Para empresas</a></li>
+        </ul>
+    </nav>
+
+    <p>Projeto acadêmico - 2026</p>
+</footer>
+
+</body>
+
+</html>
