@@ -41,7 +41,7 @@
             <li><a href="#empresas">Para empresas</a></li>
         </ul>
     </nav>
-</header>
+    </header>
 
     <main id="inicio">
 
@@ -52,7 +52,7 @@
                 Descubra pontos de coleta de acordo com sua região e com o material que deseja descartar.
             </p>
 
-            <form class="search-form" method="get">
+            <form class="search-form" action="pontos.html" method="get">
 
                 <div class="form-group">
                     <label for="bairro">Bairro ou região</label>
@@ -143,7 +143,7 @@
 
             <div class="collection-points-grid">
 
-                <article class="collection-point-card">
+                <article class="collection-point-card" data-bairro="centro" data-materials="papel plastico vidro">
 
                     <h3>Cooperativa Recicla Sorocaba</h3>
 
@@ -157,10 +157,10 @@
                         Papel, plástico e vidro 
                     </p>
                     
-                    <a href="#">Ver detalhes</a>
+                    <a href="ponto.html">Ver detalhes</a>
                 </article>
 
-                <article class="collection-point-card">
+                <article class="collection-point-card" data-bairro="campolim" data-materials="eletronicos pilhas-baterias">
 
                     <h3>Ecoponto Campolim</h3>
 
@@ -174,10 +174,10 @@
                         Eletrônicos, pilhas e baterias 
                     </p>
                     
-                    <a href="#">Ver detalhes</a>
+                    <a href="ponto.html">Ver detalhes</a>
                 </article>
 
-                <article class="collection-point-card">
+                <article class="collection-point-card" data-bairro="zona norte" data-materials="vidro metal">
 
                     <h3>Cooperativa Zona Norte</h3>
 
@@ -191,7 +191,7 @@
                         Vidro e metal 
                     </p>
                     
-                    <a href="#">Ver detalhes</a>
+                    <a href="ponto.html">Ver detalhes</a>
                 </article>
             </div>
 

@@ -449,6 +449,155 @@ body {
     outline-color: #ffffff;
 }
 
+/* Página de detalhes do ponto */
+
+.point-details {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+
+    font-weight: 600;
+    text-decoration: none;
+
+    color: var(--color-primary);
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.back-link:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+.point-information {
+    max-width: 50rem;
+    padding: 2rem;
+
+    background-color: var(--color-background);
+
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+}
+
+.point-header {
+    margin-bottom: 2rem;
+}
+
+.point-header h1 {
+    margin: 0 0 0.5rem;
+
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.point-header p {
+    margin: 0;
+
+    color: var(--color-text-muted);
+}
+
+.point-information section {
+    padding: 1.5rem 0;
+
+    border-top: 1px solid var(--color-border);
+}
+
+.point-information section h2 {
+    margin: 0 0 0.75rem;
+
+    font-size: 1.25rem;
+}
+
+.point-information section p,
+.point-information address {
+    margin: 0;
+
+    color: var(--color-text-muted);
+}
+
+.point-information address {
+    font-style: normal;
+}
+
+.point-information ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.point-information a {
+    color: var(--color-primary);
+}
+
+.point-information a:hover {
+    color: var(--color-primary-dark);
+}
+
+.points-page {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+}
+
+.points-page-header {
+    margin-bottom: 2.5rem;
+}
+
+.points-page-header h1 {
+    margin: 0 0 0.75rem;
+    font-size: 2.25rem;
+    line-height: 1.2;
+}
+
+.points-page-header p {
+    max-width: 38rem;
+    margin: 0;
+
+    color: var(--color-text-muted);
+}
+
+.points-search {
+    margin-bottom: 3rem;
+}
+
+.points-search h2 {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+}
+
+.search-results {
+    margin-top: 3rem;
+}
+
+/* Páginas temporárias de cadastro e login */
+
+.simple-page {
+    max-width: var(--content-width);
+    min-height: 60vh;
+
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+}
+
+.simple-page h1 {
+    margin: 0 0 1rem;
+
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.simple-page p {
+    margin: 0;
+
+    color: var(--color-text-muted);
+}
+
 @media (min-width: 48rem) {
     .search-form {
         grid-template-columns: 1fr 1fr auto;
