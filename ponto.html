@@ -50,24 +50,38 @@
 
     <main class="point-details">
 
-        <a class="back-link" href="index.html#pontos">
+        <a class="back-link" href="pontos.html">
             Voltar aos pontos de coleta
         </a>
 
         <article class="point-information">
 
             <header class="point-header">
-                <h1>Cooperativa Recicla Sorocaba</h1>
+                <h1 id="point-name">
+                    Cooperativa Recicla Sorocaba
+                </h1>
 
-                <p>Centro - Sorocaba</p>
+                <p id="point-region">
+                    Centro - Sorocaba
+                </p>
             </header>
 
+
             <section aria-labelledby="address-title">
-                <h2 id="address-title">Localização</h2>
+                <h2 id="address-title">
+                    Localização
+                </h2>
 
                 <address>
-                    Rua Exemplo, 150<br>
-                    Centro - Sorocaba, SP
+                    <span id="point-address-street">
+                        Rua Exemplo, 150
+                    </span>
+
+                    <br>
+
+                    <span id="point-address-city">
+                        Centro - Sorocaba, SP
+                    </span>
                 </address>
             </section>
 
@@ -77,7 +91,7 @@
                     Materiais aceitos
                 </h2>
 
-                <ul>
+                <ul id="point-materials">
                     <li>Papel</li>
                     <li>Plástico</li>
                     <li>Vidro</li>
@@ -90,18 +104,24 @@
                     Horário de atendimento
                 </h2>
 
-                <p>
+                <p id="point-hours">
                     Segunda a sexta-feira, das 8h às 17h.
                 </p>
             </section>
 
 
             <section aria-labelledby="contact-title">
-                <h2 id="contact-title">Contato</h2>
+                <h2 id="contact-title">
+                    Contato
+                </h2>
 
                 <p>
                     Telefone:
-                    <a href="tel:+551500000000">
+
+                    <a
+                        id="point-phone"
+                        href="tel:+551500000000"
+                    >
                         (15) 0000-0000
                     </a>
                 </p>
