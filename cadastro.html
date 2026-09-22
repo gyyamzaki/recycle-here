@@ -63,7 +63,7 @@
                 </li>
 
                 <li>
-                    <a href="index.html#empresas">
+                    <a href="index.html#empresas" aria-current="page">
                         Para empresas
                     </a>
                 </li>
@@ -75,17 +75,156 @@
     </header>
 
 
-    <main class="simple-page">
+    <main class="form-page">
 
         <a class="back-link" href="index.html">
             Voltar para a página inicial
         </a>
 
-        <h1>Cadastro de empresa</h1>
+        <header class="form-page-header">
+            <h1>Cadastro de empresa</h1>
 
-        <p>
-            Esta página será desenvolvida nas próximas etapas.
-        </p>
+            <p>
+                Cadastre sua empresa ou cooperativa para futuramente
+                gerenciar informações e pontos de coleta no Recycle Here.
+            </p>
+        </header>
+
+
+        <section
+            class="form-section"
+            aria-labelledby="company-register-title"
+        >
+
+            <h2 id="company-register-title">
+                Dados da empresa
+            </h2>
+
+
+            <form class="company-form">
+
+                <div class="form-group">
+                    <label for="company-name">
+                        Nome da empresa ou cooperativa
+                    </label>
+
+                    <input
+                        type="text"
+                        id="company-name"
+                        name="company-name"
+                        autocomplete="organization"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="company-cnpj">
+                        CNPJ
+                    </label>
+
+                    <input
+                        type="text"
+                        id="company-cnpj"
+                        name="company-cnpj"
+                        inputmode="numeric"
+                        placeholder="00.000.000/0000-00"
+                        maxlength="18"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="company-email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="company-email"
+                        name="company-email"
+                        autocomplete="email"
+                        placeholder="empresa@exemplo.com"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="company-phone">
+                        Telefone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="company-phone"
+                        name="company-phone"
+                        autocomplete="tel"
+                        placeholder="(15) 00000-0000"
+                        maxlength="15"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="company-password">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="company-password"
+                        name="company-password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+
+                    <small class="form-help">
+                        Utilize pelo menos 8 caracteres.
+                    </small>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="company-password-confirm">
+                        Confirmar senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="company-password-confirm"
+                        name="company-password-confirm"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        class="button-primary"
+                        type="button"
+                    >
+                        Cadastrar empresa
+                    </button>
+
+                    <p class="form-login-link">
+                        Já possui cadastro?
+                        <a href="login.html">
+                            Acesse a área da empresa
+                        </a>
+                    </p>
+
+                </div>
+
+            </form>
+
+        </section>
 
     </main>
 

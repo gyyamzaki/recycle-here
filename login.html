@@ -63,7 +63,7 @@
                 </li>
 
                 <li>
-                    <a href="index.html#empresas">
+                    <a href="index.html#empresas" aria-current="page">
                         Para empresas
                     </a>
                 </li>
@@ -75,17 +75,87 @@
     </header>
 
 
-    <main class="simple-page">
+    <main class="form-page">
 
         <a class="back-link" href="index.html">
             Voltar para a página inicial
         </a>
 
-        <h1>Área da empresa</h1>
+        <header class="form-page-header">
+            <h1>Área da empresa</h1>
 
-        <p>
-            Esta página será desenvolvida nas próximas etapas.
-        </p>
+            <p>
+                Acesse sua conta para gerenciar futuramente
+                os dados da empresa e seus pontos de coleta.
+            </p>
+        </header>
+
+
+        <section
+            class="form-section"
+            aria-labelledby="company-login-title"
+        >
+
+            <h2 id="company-login-title">
+                Entrar
+            </h2>
+
+
+            <form class="company-form">
+
+                <div class="form-group">
+                    <label for="login-email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="login-email"
+                        name="login-email"
+                        autocomplete="email"
+                        placeholder="empresa@exemplo.com"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="login-password">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="login-password"
+                        name="login-password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        class="button-primary"
+                        type="button"
+                    >
+                        Entrar
+                    </button>
+
+                    <p class="form-login-link">
+                        Ainda não possui cadastro?
+
+                        <a href="cadastro.html">
+                            Cadastre sua empresa
+                        </a>
+                    </p>
+
+                </div>
+
+            </form>
+
+        </section>
 
     </main>
 

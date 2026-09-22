@@ -5,10 +5,10 @@
 
     <meta charset="UTF-8">
 
-    <meta 
-        name="viewport" 
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+
+    <meta name="description" content="Recycle Here - Encontre pontos de coleta e reciclagem em Sorocaba.">
     <title>Recycle Here</title>
 
     <link rel="stylesheet" href="css/style.css">
@@ -35,7 +35,7 @@
         aria-label="Navegação principal"
     >
         <ul class="nav-list">
-            <li><a href="#inicio">Início</a></li>
+            <li><a href="#inicio" aria-current="page">Início</a></li>
             <li><a href="#materiais">Materiais</a></li>
             <li><a href="#pontos">Pontos de coleta</a></li>
             <li><a href="#empresas">Para empresas</a></li>
@@ -89,6 +89,23 @@
                 <p> Consulte alguns dos principais tipos de materiais e encontre locais adequados para o descarte</p>
             </header>
 
+            <figure class="materials-figure">
+
+                <img
+                    src="assets/images/materiais-reciclaveis.png"
+                    alt="Materiais recicláveis separados para descarte, como papel, plástico, vidro e metal"
+                    width="1200"
+                    height="675"
+                    loading="lazy"
+                >
+
+                <figcaption>
+                    A separação dos materiais facilita o encaminhamento correto
+                    para reciclagem.
+                </figcaption>
+
+            </figure>
+
             <div class="materials-grid">
 
                 <article class="material-card material-paper">
@@ -127,6 +144,20 @@
                 </article>
 
             </div>
+
+            <aside
+                class="recycling-tip"
+                aria-labelledby="recycling-tip-title"
+            >
+                <h3 id="recycling-tip-title">
+                    Antes de descartar
+                </h3>
+
+                <p>
+                    Sempre que possível, mantenha os materiais recicláveis
+                    limpos, secos e separados antes de levá-los ao ponto de coleta.
+                </p>
+            </aside>
 
         </section>
 
