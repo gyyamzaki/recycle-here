@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang ="pt-BR">
-
+<!DOCTYPE html> <!--define a linguagem de programação desse site como html5 para o navegador-->
+<html lang ="pt-BR"> <!--define a lnigua base desse site-->
+ 
 <head>
 
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> <!--Define o conjunto de caracteres que esse site usa-->
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Comando para responsividade do site a dispositivos mobile-->
     
 
-    <meta name="description" content="Recycle Here - Encontre pontos de coleta e reciclagem em Sorocaba.">
-    <title>Recycle Here</title>
+    <meta name="description" content="Recycle Here - Encontre pontos de coleta e reciclagem em Sorocaba."> <!--metadado de descrição do site-->
+    <title>Recycle Here</title><!--define o nome do site na aba do navegador-->
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css"> <!--Referencia o css de estilisação que esse site vai usar-->
 
 </head>
 
@@ -20,6 +20,7 @@
     <header class="site-header">
     <a class="logo" href="#inicio">Recycle Here</a>
 
+     <!--Botão de menu para caso seja um dispositivo mobile a barra de navegação não fique esmagada no cabeçalho da pagina -->   
     <button
         class="menu-button"
         type="button"
@@ -29,6 +30,7 @@
         Menu
     </button>
 
+    <!--Barra de navegação-->
     <nav
         class="site-nav"
         id="main-navigation"
@@ -45,6 +47,7 @@
 
     <main id="inicio">
 
+        <!--Seção principal do site-->
         <section class="hero" aria-labelledby="hero-title">
             <h1 id="hero-title">Encontre onde reciclar em Sorocaba</h1>
 
@@ -52,14 +55,18 @@
                 Descubra pontos de coleta de acordo com sua região e com o material que deseja descartar.
             </p>
 
+            <!--Criação de um formulario para que o usuario coloque o bairro em que mora e o material que deseja reciclar para descobrir onde pode fazer o descarte-->
             <form class="search-form" action="pontos.html" method="get">
-
+                
+                <!--caixa para escrever o bairro em que o usuario vive-->
                 <div class="form-group">
                     <label for="bairro">Bairro ou região</label>
 
                     <input type="text" id="bairro" name="bairro" placeholder="Ex.: Centro" required>
                 </div>
 
+
+                <!--Caixa de seleção do material a ser descartado-->
                 <div class="form-group">
                     <label for="material">Material</label>
 
@@ -80,6 +87,7 @@
             </form>
         </section>
 
+        <!--Seção informativa sobre materiais reciclaveis-->
         <section class="materials-section" id="materiais" aria-labelledby="materials-title">
 
             <header class="section-header">
@@ -106,6 +114,7 @@
 
             </figure>
 
+            <!--caixas informativas sobre os materiais reciclaveis divididos por tipo de material-->
             <div class="materials-grid">
 
                 <article class="material-card material-paper">
@@ -145,6 +154,7 @@
 
             </div>
 
+            <!--card com recomnedação de preparo do material-->
             <aside
                 class="recycling-tip"
                 aria-labelledby="recycling-tip-title"
@@ -161,6 +171,7 @@
 
         </section>
 
+        <!--Seção mostrando alguns dos pontos de coleta cadastrados-->
         <section class="collection-point-section" id="pontos" aria-labelledby="collection-points-title"> 
 
             <header class="section-header">
@@ -172,8 +183,10 @@
                 </p>
             </header>
 
+            <!--Grid com os cards dos pontos-->
             <div class="collection-points-grid">
 
+                <!--cada article contem as informações de cada ponto de coleta contendo tbm um variaveis com dados para pesquisa pelos pontos-->
                 <article class="collection-point-card" data-bairro="centro" data-materials="papel plastico vidro">
 
                     <h3>Cooperativa Recicla Sorocaba</h3>
@@ -228,6 +241,7 @@
 
         </section>
 
+        <!--Seção para as empresas-->
         <section class="companies-section" id="empresas" aria-labelledby="companies-title">
 
             <header class="section-header">
@@ -238,7 +252,7 @@
                     seu estabelecimento recebe.
                 </p>
             </header>
-
+            <!--dois links um para cadastro da empresaa e outro para o login na pagina da empresa linkados a duas pagina posteriores-->
             <div class="companies-actions">
                 <a class="button-primary-light" href="cadastro.html">
                     Cadastrar empresa
@@ -251,9 +265,10 @@
         </section>
     </main>
 
+    <!--Rodape da pagina-->
     <footer class="site-footer">
         <p>Recycle Here</p>
-
+        <!--sub barra de navegação-->
         <nav aria-label="Navegação do rodapé">
             <ul class="footer-nav">
                 <li><a href="#inicio">Início</a></li>
