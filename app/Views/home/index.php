@@ -1,3 +1,5 @@
+<!--index da home-->
+
 <!DOCTYPE html> <!--define a linguagem de programação desse site como html5 para o navegador-->
 <html lang ="pt-BR"> <!--define a lnigua base desse site-->
  
@@ -11,14 +13,14 @@
     <meta name="description" content="Recycle Here - Encontre pontos de coleta e reciclagem em Sorocaba."> <!--metadado de descrição do site-->
     <title>Recycle Here</title><!--define o nome do site na aba do navegador-->
 
-    <link rel="stylesheet" href="css/style.css"> <!--Referencia o css de estilisação que esse site vai usar-->
+    <link rel="stylesheet" href="/assets/css/style.css"> <!--Referencia o css de estilisação que esse site vai usar-->
 
 </head>
 
 <body>
 
     <header class="site-header">
-    <a class="logo" href="#inicio">Recycle Here</a>
+    <a class="logo" href="/">Recycle Here</a>
 
      <!--Botão de menu para caso seja um dispositivo mobile a barra de navegação não fique esmagada no cabeçalho da pagina -->   
     <button
@@ -37,10 +39,10 @@
         aria-label="Navegação principal"
     >
         <ul class="nav-list">
-            <li><a href="#inicio" aria-current="page">Início</a></li>
-            <li><a href="#materiais">Materiais</a></li>
-            <li><a href="#pontos">Pontos de coleta</a></li>
-            <li><a href="#empresas">Para empresas</a></li>
+            <li><a href="/" aria-current="page">Início</a></li>
+            <li><a href="/#materiais">Materiais</a></li>
+            <li><a href="/#pontos">Pontos de coleta</a></li>
+            <li><a href="/#empresas">Para empresas</a></li>
         </ul>
     </nav>
     </header>
@@ -56,7 +58,7 @@
             </p>
 
             <!--Criação de um formulario para que o usuario coloque o bairro em que mora e o material que deseja reciclar para descobrir onde pode fazer o descarte-->
-            <form class="search-form" action="pontos.html" method="get">
+            <form class="search-form" action="/pontos" method="get">
                 
                 <!--caixa para escrever o bairro em que o usuario vive-->
                 <div class="form-group">
@@ -100,7 +102,7 @@
             <figure class="materials-figure">
 
                 <img
-                    src="assets/images/materiais-reciclaveis.png"
+                    src="/assets/images/materiais-reciclaveis.png"
                     alt="Materiais recicláveis separados para descarte, como papel, plástico, vidro e metal"
                     width="1200"
                     height="675"
@@ -201,7 +203,7 @@
                         Papel, plástico e vidro 
                     </p>
                     
-                    <a href="ponto.html?id=1">Ver detalhes</a>
+                    <a href="/pontos/1">Ver detalhes</a>
                 </article>
 
                 <article class="collection-point-card" data-bairro="campolim" data-materials="eletronicos pilhas-baterias">
@@ -218,7 +220,7 @@
                         Eletrônicos, pilhas e baterias 
                     </p>
                     
-                    <a href="ponto.html?id=2">Ver detalhes</a>
+                    <a href="/pontos/2">Ver detalhes</a>
                 </article>
 
                 <article class="collection-point-card" data-bairro="zona norte" data-materials="vidro metal">
@@ -235,7 +237,7 @@
                         Vidro e metal 
                     </p>
                     
-                    <a href="ponto.html?id=3">Ver detalhes</a>
+                    <a href="/pontos/3">Ver detalhes</a>
                 </article>
             </div>
 
@@ -254,11 +256,11 @@
             </header>
             <!--dois links um para cadastro da empresaa e outro para o login na pagina da empresa linkados a duas pagina posteriores-->
             <div class="companies-actions">
-                <a class="button-primary-light" href="cadastro.html">
+                <a class="button-primary-light" href="/cadastro">
                     Cadastrar empresa
                 </a>
 
-                <a class="button-secondary-light" href="login.html">
+                <a class="button-secondary-light" href="/login">
                     Área da empresa
                 </a>
             </div>
@@ -271,17 +273,17 @@
         <!--sub barra de navegação-->
         <nav aria-label="Navegação do rodapé">
             <ul class="footer-nav">
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#pontos">Pontos de coleta</a></li>
-                <li><a href="#materiais">Materiais</a></li>
-                <li><a href="#empresas">Para empresas</a></li>
+                <li><a href="/">Início</a></li>
+                <li><a href="/#pontos">Pontos de coleta</a></li>
+                <li><a href="/#materiais">Materiais</a></li>
+                <li><a href="/#empresas">Para empresas</a></li>
             </ul>
         </nav>
 
         <p>Projeto acadêmico - 2026</p>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
 
 </body>
 

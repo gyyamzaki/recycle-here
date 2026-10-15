@@ -1,6 +1,6 @@
-# Váriaveis de ambiente 
-.env
+/vendor/
+/.env
+/storage/logs/*.log
 
-# Arquivos do sistema operacional
-.DS_STORE
-Thumbs.db
+/_mvc_test_backup/
+/frontend/

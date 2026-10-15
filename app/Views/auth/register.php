@@ -10,20 +10,20 @@
 
     <title>Cadastro de empresa | Recycle Here</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body>
 
     <header class="site-header">
 
-        <a class="logo" href="index.html">
+        <a class="logo" href="/">
             Recycle Here
         </a>
 
         <button
             class="menu-button"
-            type="button"
+            type="submit"
             aria-expanded="false"
             aria-controls="main-navigation"
         >
@@ -37,10 +37,10 @@
         >
 
             <ul class="nav-list">
-                <li><a href="index.html">Início</a></li>
-                <li><a href="index.html#materiais">Materiais</a></li>
-                <li><a href="index.html#pontos">Pontos de coleta</a></li>
-                <li><a href="index.html#empresas" aria-current="page">Para empresas</a></li>
+                <li><a href="/">Início</a></li>
+                <li><a href="/#materiais">Materiais</a></li>
+                <li><a href="/pontos">Pontos de coleta</a></li>
+                <li><a href="/#empresas" aria-current="page">Para empresas</a></li>
 
             </ul>
 
@@ -51,7 +51,7 @@
 
     <main class="form-page">
 
-        <a class="back-link" href="index.html">
+        <a class="back-link" href="/">
             Voltar para a página inicial
         </a>
 
@@ -75,7 +75,7 @@
             </h2>
 
 
-            <form class="company-form">
+            <form class="company-form" action="/cadastro" method="post">
 
                 <div class="form-group">
                     <label for="company-name">
@@ -85,7 +85,7 @@
                     <input
                         type="text"
                         id="company-name"
-                        name="company-name"
+                        name="company_name"
                         autocomplete="organization"
                         required
                     >
@@ -100,7 +100,7 @@
                     <input
                         type="text"
                         id="company-cnpj"
-                        name="company-cnpj"
+                        name="cnpj"
                         inputmode="numeric"
                         placeholder="00.000.000/0000-00"
                         maxlength="18"
@@ -117,7 +117,7 @@
                     <input
                         type="email"
                         id="company-email"
-                        name="company-email"
+                        name="email"
                         autocomplete="email"
                         placeholder="empresa@exemplo.com"
                         required
@@ -133,7 +133,7 @@
                     <input
                         type="tel"
                         id="company-phone"
-                        name="company-phone"
+                        name="phone"
                         autocomplete="tel"
                         placeholder="(15) 00000-0000"
                         maxlength="15"
@@ -150,7 +150,7 @@
                     <input
                         type="password"
                         id="company-password"
-                        name="company-password"
+                        name="password"
                         autocomplete="new-password"
                         minlength="8"
                         required
@@ -170,7 +170,7 @@
                     <input
                         type="password"
                         id="company-password-confirm"
-                        name="company-password-confirm"
+                        name="password_confirmation"
                         autocomplete="new-password"
                         minlength="8"
                         required
@@ -182,14 +182,14 @@
 
                     <button
                         class="button-primary"
-                        type="button"
+                        type="submit"
                     >
                         Cadastrar empresa
                     </button>
 
                     <p class="form-login-link">
                         Já possui cadastro?
-                        <a href="login.html">
+                        <a href="/login">
                             Acesse a área da empresa
                         </a>
                     </p>
@@ -212,25 +212,25 @@
             <ul class="footer-nav">
 
                 <li>
-                    <a href="index.html">
+                    <a href="/">
                         Início
                     </a>
                 </li>
 
                 <li>
-                    <a href="index.html#pontos">
+                    <a href="/pontos">
                         Pontos de coleta
                     </a>
                 </li>
 
                 <li>
-                    <a href="index.html#materiais">
+                    <a href="/#materiais">
                         Materiais
                     </a>
                 </li>
 
                 <li>
-                    <a href="index.html#empresas">
+                    <a href="/#empresas">
                         Para empresas
                     </a>
                 </li>
@@ -244,7 +244,7 @@
     </footer>
 
 
-    <script src="js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
 
 </body>
 

@@ -16,20 +16,20 @@
 
     <title>Área da empresa | Recycle Here</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body>
 
     <header class="site-header">
 
-        <a class="logo" href="index.html">
+        <a class="logo" href="/">
             Recycle Here
         </a>
 
         <button
             class="menu-button"
-            type="button"
+            type="submit"
             aria-expanded="false"
             aria-controls="main-navigation"
         >
@@ -45,25 +45,25 @@
             <ul class="nav-list">
 
                 <li>
-                    <a href="index.html">
+                    <a href="/">
                         Início
                     </a>
                 </li>
 
                 <li>
-                    <a href="index.html#materiais">
+                    <a href="/#materiais">
                         Materiais
                     </a>
                 </li>
 
                 <li>
-                    <a href="index.html#pontos">
+                    <a href="/pontos">
                         Pontos de coleta
                     </a>
                 </li>
 
                 <li>
-                    <a href="index.html#empresas" aria-current="page">
+                    <a href="/#empresas" aria-current="page">
                         Para empresas
                     </a>
                 </li>
@@ -77,7 +77,7 @@
 
     <main class="form-page">
 
-        <a class="back-link" href="index.html">
+        <a class="back-link" href="/">
             Voltar para a página inicial
         </a>
 
@@ -101,7 +101,7 @@
             </h2>
 
 
-            <form class="company-form">
+            <form class="company-form" action="/login" method="post">
 
                 <div class="form-group">
                     <label for="login-email">
@@ -111,7 +111,7 @@
                     <input
                         type="email"
                         id="login-email"
-                        name="login-email"
+                        name="email"
                         autocomplete="email"
                         placeholder="empresa@exemplo.com"
                         required
@@ -127,7 +127,7 @@
                     <input
                         type="password"
                         id="login-password"
-                        name="login-password"
+                        name="password"
                         autocomplete="current-password"
                         required
                     >
@@ -138,7 +138,7 @@
 
                     <button
                         class="button-primary"
-                        type="button"
+                        type="submit"
                     >
                         Entrar
                     </button>
@@ -146,7 +146,7 @@
                     <p class="form-login-link">
                         Ainda não possui cadastro?
 
-                        <a href="cadastro.html">
+                        <a href="/cadastro">
                             Cadastre sua empresa
                         </a>
                     </p>
@@ -169,25 +169,25 @@
             <ul class="footer-nav">
 
                 <li>
-                    <a href="index.html">
+                    <a href="/">
                         Início
                     </a>
                 </li>
 
                 <li>
-                    <a href="index.html#pontos">
+                    <a href="/pontos">
                         Pontos de coleta
                     </a>
                 </li>
 
                 <li>
-                    <a href="index.html#materiais">
+                    <a href="/#materiais">
                         Materiais
                     </a>
                 </li>
 
                 <li>
-                    <a href="index.html#empresas">
+                    <a href="/#empresas">
                         Para empresas
                     </a>
                 </li>
@@ -201,8 +201,7 @@
     </footer>
 
 
-    <script src="js/main.js"></script>
-
+    <script src="/assets/js/main.js"></script>
 </body>
 
 </html>

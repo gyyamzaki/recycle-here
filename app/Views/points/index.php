@@ -3,26 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Encontre pontos de coleta e reciclagem em Sorocaba."
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Encontre pontos de coleta e reciclagem em Sorocaba.">
 
     <title>Pontos de coleta | Recycle Here</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body>
 
     <header class="site-header">
-        <a class="logo" href="index.html">Recycle Here</a>
+        <a class="logo" href="/">Recycle Here</a>
 
         <button
             class="menu-button"
@@ -39,37 +31,19 @@
             aria-label="Navegação principal"
         >
             <ul class="nav-list">
-                <li><a href="index.html">Início</a></li>
-
-                <li>
-                    <a href="index.html#materiais">
-                        Materiais
-                    </a>
-                </li>
-
-                <li>
-                    <a
-                        href="index.html#pontos" aria-current="page">
-                        Pontos de coleta
-                    </a>
-                </li>
-
-                <li>
-                    <a href="index.html#empresas">
-                        Para empresas
-                    </a>
-                </li>
+                <li><a href="/">Início</a></li>
+                <li><a href="/#materiais">Materiais</a></li>
+                <li><a href="/pontos" aria-current="page">Pontos de coleta</a></li>
+                <li><a href="/#empresas">Para empresas</a></li>
             </ul>
         </nav>
     </header>
 
-
     <main class="points-page">
 
-        <a class="back-link" href="index.html">
+        <a class="back-link" href="/">
             Voltar para a página inicial
         </a>
-
 
         <header class="points-page-header">
             <h1>Pontos de coleta</h1>
@@ -79,7 +53,6 @@
                 seus materiais em Sorocaba.
             </p>
         </header>
-
 
         <section
             class="points-search"
@@ -91,10 +64,9 @@
 
             <form
                 class="search-form"
-                action="pontos.html"
+                action="/pontos"
                 method="get"
             >
-
                 <div class="form-group">
                     <label for="bairro">
                         Bairro ou região
@@ -108,7 +80,6 @@
                     >
                 </div>
 
-
                 <div class="form-group">
                     <label for="material">
                         Material
@@ -118,55 +89,28 @@
                         id="material"
                         name="material"
                     >
-                        <option value="">
-                            Todos os materiais
-                        </option>
-
-                        <option value="papel">
-                            Papel
-                        </option>
-
-                        <option value="plastico">
-                            Plástico
-                        </option>
-
-                        <option value="vidro">
-                            Vidro
-                        </option>
-
-                        <option value="metal">
-                            Metal
-                        </option>
-
-                        <option value="eletronicos">
-                            Eletrônicos
-                        </option>
-
-                        <option value="pilhas-baterias">
-                            Pilhas e baterias
-                        </option>
-
-                        <option value="oleo-usado">
-                            Óleo usado
-                        </option>
+                        <option value="">Todos os materiais</option>
+                        <option value="papel">Papel</option>
+                        <option value="plastico">Plástico</option>
+                        <option value="vidro">Vidro</option>
+                        <option value="metal">Metal</option>
+                        <option value="eletronicos">Eletrônicos</option>
+                        <option value="pilhas-baterias">Pilhas e baterias</option>
+                        <option value="oleo-usado">Óleo usado</option>
                     </select>
                 </div>
 
                 <button type="submit">
                     Buscar
                 </button>
-
             </form>
         </section>
-
 
         <section
             class="search-results"
             aria-labelledby="results-title"
         >
-
             <header class="section-header">
-
                 <h2 id="results-title">
                     Resultados encontrados
                 </h2>
@@ -174,17 +118,16 @@
                 <p id="results-description">
                     Pontos disponíveis para sua pesquisa.
                 </p>
-
             </header>
-
 
             <div class="collection-points-grid">
 
-                <article class="collection-point-card" data-bairro="centro" data-materials="papel plastico vidro">
-
-                    <h3>
-                        Cooperativa Recicla Sorocaba
-                    </h3>
+                <article
+                    class="collection-point-card"
+                    data-bairro="centro"
+                    data-materials="papel plastico vidro"
+                >
+                    <h3>Cooperativa Recicla Sorocaba</h3>
 
                     <p>
                         <strong>Localização:</strong><br>
@@ -196,18 +139,17 @@
                         Papel, plástico e vidro
                     </p>
 
-                    <a href="ponto.html?id=1">
+                    <a href="/pontos/1">
                         Ver detalhes
                     </a>
-
                 </article>
 
-
-                <article class="collection-point-card" data-bairro="campolim" data-materials="eletronicos pilhas-baterias">
-
-                    <h3>
-                        Ecoponto Campolim
-                    </h3>
+                <article
+                    class="collection-point-card"
+                    data-bairro="campolim"
+                    data-materials="eletronicos pilhas-baterias"
+                >
+                    <h3>Ecoponto Campolim</h3>
 
                     <p>
                         <strong>Localização:</strong><br>
@@ -219,18 +161,17 @@
                         Eletrônicos, pilhas e baterias
                     </p>
 
-                    <a href="ponto.html?id=2">
+                    <a href="/pontos/2">
                         Ver detalhes
                     </a>
-
                 </article>
 
-
-                <article class="collection-point-card" data-bairro="zona norte" data-materials="vidro metal">
-
-                    <h3>
-                        Cooperativa Zona Norte
-                    </h3>
+                <article
+                    class="collection-point-card"
+                    data-bairro="zona norte"
+                    data-materials="vidro metal"
+                >
+                    <h3>Cooperativa Zona Norte</h3>
 
                     <p>
                         <strong>Localização:</strong><br>
@@ -242,10 +183,9 @@
                         Vidro e metal
                     </p>
 
-                    <a href="ponto.html?id=3">
+                    <a href="/pontos/3">
                         Ver detalhes
                     </a>
-
                 </article>
 
             </div>
@@ -253,50 +193,22 @@
 
     </main>
 
-
     <footer class="site-footer">
-
         <p>Recycle Here</p>
 
         <nav aria-label="Navegação do rodapé">
-
             <ul class="footer-nav">
-
-                <li>
-                    <a href="index.html">
-                        Início
-                    </a>
-                </li>
-
-                <li>
-                    <a href="index.html#pontos">
-                        Pontos de coleta
-                    </a>
-                </li>
-
-                <li>
-                    <a href="index.html#materiais">
-                        Materiais
-                    </a>
-                </li>
-
-                <li>
-                    <a href="index.html#empresas">
-                        Para empresas
-                    </a>
-                </li>
-
+                <li><a href="/">Início</a></li>
+                <li><a href="/pontos">Pontos de coleta</a></li>
+                <li><a href="/#materiais">Materiais</a></li>
+                <li><a href="/#empresas">Para empresas</a></li>
             </ul>
-
         </nav>
 
         <p>Projeto acadêmico - 2026</p>
-
     </footer>
 
-
-    <script src="js/main.js"></script>
-
+    <script src="/assets/js/main.js"></script>
 </body>
 
 </html>
