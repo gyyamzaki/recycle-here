@@ -1,0 +1,29 @@
+USE recycle_here;
+
+SET NAMES utf8mb4;
+
+CREATE TABLE IF NOT EXISTS companies (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
+    user_id INT UNSIGNED NOT NULL UNIQUE,
+
+    name VARCHAR(150) NOT NULL,
+
+    cnpj CHAR(14) NOT NULL UNIQUE,
+
+    phone VARCHAR(20) NOT NULL,
+
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    updated_at TIMESTAMP NOT NULL
+        DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_companies_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);

@@ -122,71 +122,87 @@
 
             <div class="collection-points-grid">
 
-                <article
-                    class="collection-point-card"
-                    data-bairro="centro"
-                    data-materials="papel plastico vidro"
-                >
-                    <h3>Cooperativa Recicla Sorocaba</h3>
+                <?php foreach ($points as $point): ?>
 
-                    <p>
-                        <strong>Localização:</strong><br>
-                        Centro - Sorocaba
-                    </p>
+                    <article
+                        class="collection-point-card"
 
-                    <p>
-                        <strong>Materiais aceitos:</strong><br>
-                        Papel, plástico e vidro
-                    </p>
+                        data-bairro="<?= htmlspecialchars(
+                            mb_strtolower($point->neighborhood),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
 
-                    <a href="/pontos/1">
-                        Ver detalhes
-                    </a>
-                </article>
+                        data-materials="<?= htmlspecialchars(
+                            implode(' ', $point->materialSlugs),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
+                    >
 
-                <article
-                    class="collection-point-card"
-                    data-bairro="campolim"
-                    data-materials="eletronicos pilhas-baterias"
-                >
-                    <h3>Ecoponto Campolim</h3>
+                        <h3>
+                            <?= htmlspecialchars(
+                                $point->name,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </h3>
 
-                    <p>
-                        <strong>Localização:</strong><br>
-                        Campolim - Sorocaba
-                    </p>
 
-                    <p>
-                        <strong>Materiais aceitos:</strong><br>
-                        Eletrônicos, pilhas e baterias
-                    </p>
+                        <p>
 
-                    <a href="/pontos/2">
-                        Ver detalhes
-                    </a>
-                </article>
+                            <strong>
+                                Localização:
+                            </strong>
 
-                <article
-                    class="collection-point-card"
-                    data-bairro="zona norte"
-                    data-materials="vidro metal"
-                >
-                    <h3>Cooperativa Zona Norte</h3>
+                            <br>
 
-                    <p>
-                        <strong>Localização:</strong><br>
-                        Zona Norte - Sorocaba
-                    </p>
+                            <?= htmlspecialchars(
+                                $point->neighborhood,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
 
-                    <p>
-                        <strong>Materiais aceitos:</strong><br>
-                        Vidro e metal
-                    </p>
+                            -
 
-                    <a href="/pontos/3">
-                        Ver detalhes
-                    </a>
-                </article>
+                            <?= htmlspecialchars(
+                                $point->city,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Materiais aceitos:
+                            </strong>
+
+                            <br>
+
+                            <?= htmlspecialchars(
+                                implode(
+                                    ', ',
+                                    $point->materials
+                                ),
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+
+                        </p>
+
+
+                        <a
+                            href="/pontos/<?= $point->id ?>"
+                        >
+                            Ver detalhes
+                        </a>
+
+                    </article>
+
+                <?php endforeach; ?>
 
             </div>
         </section>

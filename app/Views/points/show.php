@@ -14,8 +14,14 @@
         content="Informações sobre ponto de coleta no Recycle Here."
     >
 
-    <title>Detalhes do ponto | Recycle Here</title>
-
+    <title>
+        <?= htmlspecialchars(
+            $point->name,
+            ENT_QUOTES,
+            'UTF-8'
+        ) ?>
+        | Recycle Here
+    </title>
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
@@ -58,11 +64,29 @@
 
             <header class="point-header">
                 <h1 id="point-name">
-                    Cooperativa Recicla Sorocaba
+                    <?= htmlspecialchars(
+                        $point->name,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
                 </h1>
 
                 <p id="point-region">
-                    Centro - Sorocaba
+
+                    <?= htmlspecialchars(
+                        $point->neighborhood,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
+
+                    -
+
+                    <?= htmlspecialchars(
+                        $point->city,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
+
                 </p>
             </header>
 
@@ -73,15 +97,60 @@
                 </h2>
 
                 <address>
+
                     <span id="point-address-street">
-                        Rua Exemplo, 150
+
+                        <?= htmlspecialchars(
+                            $point->street,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>,
+
+                        <?= htmlspecialchars(
+                            $point->number,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+
+                        <?php if ($point->complement): ?>
+
+                            -
+                            <?= htmlspecialchars(
+                                $point->complement,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+
+                        <?php endif; ?>
+
                     </span>
 
                     <br>
 
                     <span id="point-address-city">
-                        Centro - Sorocaba, SP
+
+                        <?= htmlspecialchars(
+                            $point->neighborhood,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+
+                        -
+
+                        <?= htmlspecialchars(
+                            $point->city,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>,
+
+                        <?= htmlspecialchars(
+                            $point->state,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+
                     </span>
+
                 </address>
             </section>
 
@@ -92,9 +161,19 @@
                 </h2>
 
                 <ul id="point-materials">
-                    <li>Papel</li>
-                    <li>Plástico</li>
-                    <li>Vidro</li>
+
+                    <?php foreach ($point->materials as $material): ?>
+
+                        <li>
+                            <?= htmlspecialchars(
+                                $material,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </li>
+
+                    <?php endforeach; ?>
+
                 </ul>
             </section>
 
@@ -105,7 +184,13 @@
                 </h2>
 
                 <p id="point-hours">
-                    Segunda a sexta-feira, das 8h às 17h.
+
+                    <?= htmlspecialchars(
+                        $point->openingHours,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
+
                 </p>
             </section>
 
@@ -115,16 +200,43 @@
                     Contato
                 </h2>
 
+                <?php if ($point->phone): ?>
+
                 <p>
+
                     Telefone:
 
                     <a
                         id="point-phone"
-                        href="tel:+551500000000"
+
+                        href="tel:<?= htmlspecialchars(
+                            preg_replace(
+                                '/\D/',
+                                '',
+                                $point->phone
+                            ),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
                     >
-                        (15) 0000-0000
+
+                        <?= htmlspecialchars(
+                            $point->phone,
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>
+
                     </a>
+
                 </p>
+
+            <?php else: ?>
+
+                <p>
+                    Telefone não informado.
+                </p>
+
+            <?php endif; ?>
             </section>
 
         </article>
