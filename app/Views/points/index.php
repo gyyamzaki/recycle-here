@@ -1,3 +1,11 @@
+<?php
+
+$filters = $filters ?? ['bairro' => '', 'material' => ''];
+$errors = $errors ?? [];
+$materials = $materials ?? [];
+$points = $points ?? [];
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -77,6 +85,12 @@
                         id="bairro"
                         name="bairro"
                         placeholder="Ex.: Centro"
+                        maxlength="100"
+                        value="<?= htmlspecialchars(
+                            $filters['bairro'] ?? '',
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
                     >
                 </div>
 
@@ -89,21 +103,71 @@
                         id="material"
                         name="material"
                     >
-                        <option value="">Todos os materiais</option>
-                        <option value="papel">Papel</option>
-                        <option value="plastico">Plástico</option>
-                        <option value="vidro">Vidro</option>
-                        <option value="metal">Metal</option>
-                        <option value="eletronicos">Eletrônicos</option>
-                        <option value="pilhas-baterias">Pilhas e baterias</option>
-                        <option value="oleo-usado">Óleo usado</option>
-                    </select>
+
+                        <option value="">
+                            Todos os materiais
+                        </option>
+
+
+                        <?php foreach ($materials as $material): ?>
+
+                            <option
+                                value="<?= htmlspecialchars(
+                                    $material->slug,
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>"
+
+                                <?php if (
+                                    ($filters['material'] ?? '') ===
+                                    $material->slug
+                                ): ?>
+
+                                    selected
+
+                                <?php endif; ?>
+                            >
+
+                                <?= htmlspecialchars(
+                                    $material->name,
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+
+                            </option>
+
+                        <?php endforeach; ?>
+
+                    </select>  
                 </div>
 
                 <button type="submit">
                     Buscar
                 </button>
             </form>
+
+            <?php if (!empty($errors)): ?>
+
+                <div
+                    class="form-errors"
+                    role="alert"
+                >
+
+                    <?php foreach ($errors as $error): ?>
+
+                        <p>
+                            <?= htmlspecialchars(
+                                $error,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </p>
+
+                    <?php endforeach; ?>
+
+                </div>
+
+            <?php endif; ?>
         </section>
 
         <section
@@ -116,7 +180,27 @@
                 </h2>
 
                 <p id="results-description">
-                    Pontos disponíveis para sua pesquisa.
+
+                    <?php if (!empty($errors)): ?>
+
+                        Corrija os filtros informados.
+
+                    <?php elseif (count($points) === 0): ?>
+
+                        Nenhum ponto foi encontrado
+                        para os critérios informados.
+
+                    <?php elseif (count($points) === 1): ?>
+
+                        1 ponto encontrado.
+
+                    <?php else: ?>
+
+                        <?= count($points) ?>
+                        pontos encontrados.
+
+                    <?php endif; ?>
+
                 </p>
             </header>
 
@@ -124,21 +208,7 @@
 
                 <?php foreach ($points as $point): ?>
 
-                    <article
-                        class="collection-point-card"
-
-                        data-bairro="<?= htmlspecialchars(
-                            mb_strtolower($point->neighborhood),
-                            ENT_QUOTES,
-                            'UTF-8'
-                        ) ?>"
-
-                        data-materials="<?= htmlspecialchars(
-                            implode(' ', $point->materialSlugs),
-                            ENT_QUOTES,
-                            'UTF-8'
-                        ) ?>"
-                    >
+                    <article class="collection-point-card">
 
                         <h3>
                             <?= htmlspecialchars(
@@ -195,7 +265,7 @@
 
 
                         <a
-                            href="/pontos/<?= $point->id ?>"
+                            href="/pontos/<?= (int) $point->id ?>"
                         >
                             Ver detalhes
                         </a>

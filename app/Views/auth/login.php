@@ -1,3 +1,9 @@
+<?php
+
+$errors = $errors ?? [];
+$old = $old ?? $_POST;
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -29,7 +35,7 @@
 
         <button
             class="menu-button"
-            type="submit"
+            type="button"
             aria-expanded="false"
             aria-controls="main-navigation"
         >
@@ -85,8 +91,8 @@
             <h1>Área da empresa</h1>
 
             <p>
-                Acesse sua conta para gerenciar futuramente
-                os dados da empresa e seus pontos de coleta.
+                Acesse sua conta para gerenciar os dados da empresa
+                e seus pontos de coleta.
             </p>
         </header>
 
@@ -100,8 +106,41 @@
                 Entrar
             </h2>
 
+            <?php if (!empty($errors)): ?>
+
+                <div
+                    class="form-errors"
+                    role="alert"
+                    aria-live="polite"
+                >
+
+                    <?php foreach ($errors as $error): ?>
+
+                        <p>
+                            <?= htmlspecialchars(
+                                (string) $error,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </p>
+
+                    <?php endforeach; ?>
+
+                </div>
+
+            <?php endif; ?>
 
             <form class="company-form" action="/login" method="post">
+
+                <input
+                    type="hidden"
+                    name="_csrf"
+                    value="<?= htmlspecialchars(
+                        App\Core\Csrf::token(),
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>"
+                >
 
                 <div class="form-group">
                     <label for="login-email">
@@ -114,6 +153,11 @@
                         name="email"
                         autocomplete="email"
                         placeholder="empresa@exemplo.com"
+                        value="<?= htmlspecialchars(
+                            (string) ($old['email'] ?? ''),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
                         required
                     >
                 </div>

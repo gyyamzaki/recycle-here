@@ -9,6 +9,8 @@ require_once $rootPath . '/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable($rootPath);
 $dotenv->safeLoad();
 
+App\Core\Session::start();
+
 $debug = filter_var(
     $_ENV['APP_DEBUG'] ?? false,
     FILTER_VALIDATE_BOOL

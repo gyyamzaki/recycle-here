@@ -1,3 +1,9 @@
+<?php
+
+$materials = $materials ?? [];
+$featuredPoints = $featuredPoints ?? [];
+
+?>
 <!--index da home-->
 
 <!DOCTYPE html> <!--define a linguagem de programação desse site como html5 para o navegador-->
@@ -72,15 +78,26 @@
                 <div class="form-group">
                     <label for="material">Material</label>
 
-                    <select id="material" name="material" required>
-                        <option value="">Selecione um material</option>
-                        <option value="papel">Papel</option>
-                        <option value="plastico">Plástico</option>
-                        <option value="vidro">Vidro</option>
-                        <option value="metal">Metal</option>
-                        <option value="eletronicos">Eletrônicos</option>
-                        <option value="pilhas-baterias">Pilhas e baterias</option>
-                        <option value="oleo-usado">Óleo usado</option>
+                    <select id="material" name="material">
+                        <option value="">Todos os materiais</option>
+
+                        <?php foreach ($materials as $material): ?>
+
+                            <option
+                                value="<?= htmlspecialchars(
+                                    $material->slug,
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>"
+                            >
+                                <?= htmlspecialchars(
+                                    $material->name,
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </option>
+
+                        <?php endforeach; ?>
                     </select>
                 </div>
 
@@ -185,61 +202,68 @@
                 </p>
             </header>
 
-            <!--Grid com os cards dos pontos-->
+            <!--Grid com os pontos cadastrados no banco-->
             <div class="collection-points-grid">
 
-                <!--cada article contem as informações de cada ponto de coleta contendo tbm um variaveis com dados para pesquisa pelos pontos-->
-                <article class="collection-point-card" data-bairro="centro" data-materials="papel plastico vidro">
+                <?php if (empty($featuredPoints)): ?>
 
-                    <h3>Cooperativa Recicla Sorocaba</h3>
+                    <p>Nenhum ponto de coleta está disponível no momento.</p>
 
-                    <p>
-                        <strong>Localização:</strong>
-                        Centro - Sorocaba
-                    </p>
+                <?php else: ?>
 
-                    <p> 
-                        <strong>Materiais aceitos:</strong>
-                        Papel, plástico e vidro 
-                    </p>
-                    
-                    <a href="/pontos/1">Ver detalhes</a>
-                </article>
+                    <?php foreach ($featuredPoints as $point): ?>
 
-                <article class="collection-point-card" data-bairro="campolim" data-materials="eletronicos pilhas-baterias">
+                        <article class="collection-point-card">
 
-                    <h3>Ecoponto Campolim</h3>
+                            <h3>
+                                <?= htmlspecialchars(
+                                    $point->name,
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </h3>
 
-                    <p>
-                        <strong>Localização:</strong>
-                        Campolim - Sorocaba
-                    </p>
+                            <p>
+                                <strong>Localização:</strong>
+                                <?= htmlspecialchars(
+                                    $point->neighborhood,
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                                -
+                                <?= htmlspecialchars(
+                                    $point->city,
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </p>
 
-                    <p> 
-                        <strong>Materiais aceitos:</strong>
-                        Eletrônicos, pilhas e baterias 
-                    </p>
-                    
-                    <a href="/pontos/2">Ver detalhes</a>
-                </article>
+                            <p>
+                                <strong>Materiais aceitos:</strong>
+                                <?= htmlspecialchars(
+                                    implode(', ', $point->materials),
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </p>
 
-                <article class="collection-point-card" data-bairro="zona norte" data-materials="vidro metal">
+                            <a href="/pontos/<?= (int) $point->id ?>">
+                                Ver detalhes
+                            </a>
 
-                    <h3>Cooperativa Zona Norte</h3>
+                        </article>
 
-                    <p>
-                        <strong>Localização:</strong>
-                        Zona Norte - Sorocaba
-                    </p>
+                    <?php endforeach; ?>
 
-                    <p> 
-                        <strong>Materiais aceitos:</strong>
-                        Vidro e metal 
-                    </p>
-                    
-                    <a href="/pontos/3">Ver detalhes</a>
-                </article>
+                <?php endif; ?>
+
             </div>
+
+            <p>
+                <a class="button-primary" href="/pontos">
+                    Ver todos os pontos
+                </a>
+            </p>
 
         </section>
 

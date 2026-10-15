@@ -1,3 +1,9 @@
+<?php
+
+$errors = $errors ?? [];
+$old = $old ?? $_POST;
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -23,7 +29,7 @@
 
         <button
             class="menu-button"
-            type="submit"
+            type="button"
             aria-expanded="false"
             aria-controls="main-navigation"
         >
@@ -59,8 +65,8 @@
             <h1>Cadastro de empresa</h1>
 
             <p>
-                Cadastre sua empresa ou cooperativa para futuramente
-                gerenciar informações e pontos de coleta no Recycle Here.
+                Cadastre sua empresa ou cooperativa para gerenciar
+                informações e pontos de coleta no Recycle Here.
             </p>
         </header>
 
@@ -74,8 +80,41 @@
                 Dados da empresa
             </h2>
 
+            <?php if (!empty($errors)): ?>
+
+                <div
+                    class="form-errors"
+                    role="alert"
+                    aria-live="polite"
+                >
+
+                    <?php foreach ($errors as $error): ?>
+
+                        <p>
+                            <?= htmlspecialchars(
+                                (string) $error,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </p>
+
+                    <?php endforeach; ?>
+
+                </div>
+
+            <?php endif; ?>
 
             <form class="company-form" action="/cadastro" method="post">
+
+                <input
+                    type="hidden"
+                    name="_csrf"
+                    value="<?= htmlspecialchars(
+                        App\Core\Csrf::token(),
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>"
+                >
 
                 <div class="form-group">
                     <label for="company-name">
@@ -87,6 +126,12 @@
                         id="company-name"
                         name="company_name"
                         autocomplete="organization"
+                        maxlength="150"
+                        value="<?= htmlspecialchars(
+                            (string) ($old['company_name'] ?? ''),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
                         required
                     >
                 </div>
@@ -104,6 +149,11 @@
                         inputmode="numeric"
                         placeholder="00.000.000/0000-00"
                         maxlength="18"
+                        value="<?= htmlspecialchars(
+                            (string) ($old['cnpj'] ?? ''),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
                         required
                     >
                 </div>
@@ -120,6 +170,12 @@
                         name="email"
                         autocomplete="email"
                         placeholder="empresa@exemplo.com"
+                        maxlength="180"
+                        value="<?= htmlspecialchars(
+                            (string) ($old['email'] ?? ''),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
                         required
                     >
                 </div>
@@ -137,6 +193,11 @@
                         autocomplete="tel"
                         placeholder="(15) 00000-0000"
                         maxlength="15"
+                        value="<?= htmlspecialchars(
+                            (string) ($old['phone'] ?? ''),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
                         required
                     >
                 </div>

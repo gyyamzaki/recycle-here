@@ -32,3 +32,20 @@ $router->get(
     '/cadastro',
     [AuthController::class, 'registerForm']
 );
+
+$router->post(
+    '/login',
+    [AuthController::class, 'login']
+);
+
+
+$router->post(
+    '/cadastro',
+    [AuthController::class, 'register']
+);
+
+
+$router->post(
+    '/logout',
+    [AuthController::class, 'logout']
+);

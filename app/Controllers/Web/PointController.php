@@ -7,16 +7,26 @@ namespace App\Controllers\Web;
 use App\Core\Request;
 use App\Core\Response;
 use App\Services\CollectionPointService;
+use App\Services\MaterialService;
+use App\Validators\CollectionPointSearchValidator;
 
 final class PointController
 {
-    private CollectionPointService $service;
+    private CollectionPointService $pointService;
+    private MaterialService $materialService;
+    private CollectionPointSearchValidator $searchValidator;
 
 
     public function __construct()
     {
-        $this->service =
+        $this->pointService =
             new CollectionPointService();
+
+        $this->materialService =
+            new MaterialService();
+
+        $this->searchValidator =
+            new CollectionPointSearchValidator();
     }
 
 
@@ -24,8 +34,39 @@ final class PointController
         Request $request
     ): void {
 
-        $points =
-            $this->service->listActive();
+        $validation =
+            $this->searchValidator->validate(
+                $request->query()
+            );
+
+
+        $filters =
+            $validation['data'];
+
+        $errors =
+            $validation['errors'];
+
+
+        $materials =
+            $this->materialService
+                ->listActive();
+
+
+        if (!$validation['valid']) {
+
+            Response::status(400);
+
+            $points = [];
+
+        } else {
+
+            $points =
+                $this->pointService
+                    ->searchActive(
+                        $filters['bairro'],
+                        $filters['material']
+                    );
+        }
 
 
         require dirname(__DIR__, 2)
@@ -53,8 +94,10 @@ final class PointController
 
 
         $point =
-            $this->service
-                ->findActiveById((int) $id);
+            $this->pointService
+                ->findActiveById(
+                    (int) $id
+                );
 
 
         if ($point === null) {

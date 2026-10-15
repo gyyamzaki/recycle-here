@@ -1,3 +1,8 @@
+<?php
+
+/** @var App\Models\CollectionPoint $point */
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -91,6 +96,22 @@
             </header>
 
 
+
+            <section aria-labelledby="company-title">
+                <h2 id="company-title">
+                    Responsável pelo ponto
+                </h2>
+
+                <p>
+                    <?= htmlspecialchars(
+                        $point->companyName,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
+                </p>
+            </section>
+
+
             <section aria-labelledby="address-title">
                 <h2 id="address-title">
                     Localização
@@ -150,6 +171,21 @@
                         ) ?>
 
                     </span>
+
+                    <?php if (!empty($point->zipCode)): ?>
+
+                        <br>
+
+                        <span>
+                            CEP:
+                            <?= htmlspecialchars(
+                                $point->zipCode,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </span>
+
+                    <?php endif; ?>
 
                 </address>
             </section>

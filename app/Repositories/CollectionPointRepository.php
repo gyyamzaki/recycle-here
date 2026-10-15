@@ -20,9 +20,62 @@ final class CollectionPointRepository
     }
 
 
-    public function allActive(): array
-    {
-        $sql = '
+    public function searchActive(
+        string $neighborhood = '',
+        string $materialSlug = ''
+    ): array {
+
+        $conditions = [
+            'cp.active = 1',
+            'c.active = 1',
+        ];
+
+
+        $parameters = [];
+
+
+        if ($neighborhood !== '') {
+
+            $conditions[] =
+                'cp.neighborhood LIKE :neighborhood';
+
+            $parameters['neighborhood'] =
+                '%' . $neighborhood . '%';
+        }
+
+
+        if ($materialSlug !== '') {
+
+            $conditions[] = '
+                EXISTS (
+                    SELECT 1
+
+                    FROM collection_point_material cpm_filter
+
+                    INNER JOIN materials m_filter
+                        ON m_filter.id =
+                            cpm_filter.material_id
+
+                    WHERE
+                        cpm_filter.collection_point_id = cp.id
+                        AND m_filter.slug = :material_slug
+                        AND m_filter.active = 1
+                )
+            ';
+
+            $parameters['material_slug'] =
+                $materialSlug;
+        }
+
+
+        $where =
+            implode(
+                ' AND ',
+                $conditions
+            );
+
+
+        $sql = "
             SELECT
                 cp.id,
                 cp.company_id,
@@ -36,18 +89,19 @@ final class CollectionPointRepository
                 cp.zip_code,
                 cp.phone,
                 cp.opening_hours,
+
                 c.name AS company_name,
 
                 GROUP_CONCAT(
                     m.name
                     ORDER BY m.name
-                    SEPARATOR "||"
+                    SEPARATOR '||'
                 ) AS materials,
 
                 GROUP_CONCAT(
                     m.slug
                     ORDER BY m.name
-                    SEPARATOR "||"
+                    SEPARATOR '||'
                 ) AS material_slugs
 
             FROM collection_points cp
@@ -62,9 +116,7 @@ final class CollectionPointRepository
                 ON m.id = cpm.material_id
                 AND m.active = 1
 
-            WHERE
-                cp.active = 1
-                AND c.active = 1
+            WHERE {$where}
 
             GROUP BY
                 cp.id,
@@ -82,20 +134,25 @@ final class CollectionPointRepository
                 c.name
 
             ORDER BY cp.name
-        ';
+        ";
 
 
         $statement =
             $this->connection->prepare($sql);
 
-        $statement->execute();
+
+        $statement->execute(
+            $parameters
+        );
 
 
         $points = [];
 
 
         foreach ($statement->fetchAll() as $row) {
-            $points[] = $this->map($row);
+
+            $points[] =
+                $this->map($row);
         }
 
 

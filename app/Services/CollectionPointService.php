@@ -21,9 +21,16 @@ final class CollectionPointService
     }
 
 
-    public function listActive(): array
-    {
-        return $this->repository->allActive();
+    public function searchActive(
+        string $neighborhood = '',
+        string $materialSlug = ''
+    ): array {
+
+        return $this->repository
+            ->searchActive(
+                $neighborhood,
+                $materialSlug
+            );
     }
 
 
