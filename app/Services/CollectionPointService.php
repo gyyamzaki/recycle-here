@@ -41,4 +41,14 @@ final class CollectionPointService
         return $this->repository
             ->findActiveById($id);
     }
+
+    public function listByCompany(
+        int $companyId
+    ): array {
+
+        return $this->repository
+            ->findByCompanyId(
+                $companyId
+            );
+    }
 }

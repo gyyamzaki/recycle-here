@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Controllers\Web\AuthController;
 use App\Controllers\Web\HomeController;
 use App\Controllers\Web\PointController;
+use App\Controllers\Web\CompanyPointController;
 
 /** @var App\Core\Router $router */
 
@@ -48,4 +49,9 @@ $router->post(
 $router->post(
     '/logout',
     [AuthController::class, 'logout']
+);
+
+$router->get(
+    '/empresa/pontos',
+    [CompanyPointController::class, 'index']
 );

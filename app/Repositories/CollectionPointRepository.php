@@ -307,4 +307,101 @@ final class CollectionPointRepository
                 $materialSlugs
         );
     }
+
+    public function findByCompanyId(
+        int $companyId
+    ): array {
+
+        $sql = "
+            SELECT
+                cp.id,
+                cp.company_id,
+                cp.name,
+                cp.street,
+                cp.number,
+                cp.complement,
+                cp.neighborhood,
+                cp.city,
+                cp.state,
+                cp.zip_code,
+                cp.phone,
+                cp.opening_hours,
+
+                c.name AS company_name,
+
+                GROUP_CONCAT(
+                    m.name
+                    ORDER BY m.name
+                    SEPARATOR '||'
+                ) AS materials,
+
+                GROUP_CONCAT(
+                    m.slug
+                    ORDER BY m.name
+                    SEPARATOR '||'
+                ) AS material_slugs
+
+            FROM collection_points cp
+
+            INNER JOIN companies c
+                ON c.id = cp.company_id
+
+            LEFT JOIN collection_point_material cpm
+                ON cpm.collection_point_id =
+                    cp.id
+
+            LEFT JOIN materials m
+                ON m.id =
+                    cpm.material_id
+
+            WHERE
+                cp.company_id = :company_id
+                AND cp.active = 1
+
+            GROUP BY
+                cp.id,
+                cp.company_id,
+                cp.name,
+                cp.street,
+                cp.number,
+                cp.complement,
+                cp.neighborhood,
+                cp.city,
+                cp.state,
+                cp.zip_code,
+                cp.phone,
+                cp.opening_hours,
+                c.name
+
+            ORDER BY cp.name
+        ";
+
+
+        $statement =
+            $this->connection->prepare(
+                $sql
+            );
+
+
+        $statement->execute([
+            'company_id' =>
+                $companyId
+        ]);
+
+
+        $points = [];
+
+
+        foreach (
+            $statement->fetchAll()
+            as $row
+        ) {
+
+            $points[] =
+                $this->map($row);
+        }
+
+
+        return $points;
+    }
 }

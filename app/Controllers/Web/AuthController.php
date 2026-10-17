@@ -102,7 +102,7 @@ final class AuthController
 
 
         Response::redirect(
-            '/pontos'
+            '/empresa/pontos'
         );
     }
 
