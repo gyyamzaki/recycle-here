@@ -100,7 +100,10 @@ final class Router
         http_response_code(404);
 
         echo '<h1>404</h1>';
-        echo '<p>Página não encontrada.</p>';
+        Response::status(404);
+
+        require dirname(__DIR__)
+            . '/Views/errors/404.php';
     }
 
 

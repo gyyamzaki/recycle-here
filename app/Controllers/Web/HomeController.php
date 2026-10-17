@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers\Web;
 
 use App\Core\Request;
+use App\Core\Session;
 use App\Services\CollectionPointService;
 use App\Services\MaterialService;
 
@@ -13,22 +14,50 @@ final class HomeController
     private CollectionPointService $pointService;
     private MaterialService $materialService;
 
+
     public function __construct()
     {
-        $this->pointService = new CollectionPointService();
-        $this->materialService = new MaterialService();
+        $this->pointService =
+            new CollectionPointService();
+
+        $this->materialService =
+            new MaterialService();
     }
 
-    public function index(Request $request): void
-    {
-        $materials = $this->materialService->listActive();
 
-        $featuredPoints = array_slice(
-            $this->pointService->searchActive(),
-            0,
-            3
-        );
+    public function index(
+        Request $request
+    ): void {
 
-        require dirname(__DIR__, 2) . '/Views/home/index.php';
+        // Busca os materiais ativos para o formulário de pesquisa.
+        $materials =
+            $this->materialService
+                ->listActive();
+
+
+        // Mostra até três pontos de coleta na página inicial.
+        $featuredPoints =
+            array_slice(
+                $this->pointService
+                    ->searchActive(),
+                0,
+                3
+            );
+
+
+        // Verifica se existe um usuário autenticado.
+        $user =
+            Session::get('user');
+
+
+        // Só considera logado na área da empresa
+        // quando a sessão existe e o perfil é "company".
+        $isCompanyLogged =
+            is_array($user) &&
+            ($user['role'] ?? null) === 'company';
+
+
+        require dirname(__DIR__, 2)
+            . '/Views/home/index.php';
     }
 }

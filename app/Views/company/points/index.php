@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
@@ -8,6 +9,11 @@
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Área da empresa para gerenciamento dos pontos de coleta no Recycle Here."
     >
 
     <title>
@@ -21,30 +27,71 @@
 
 </head>
 
+
 <body>
 
     <header class="site-header">
 
-        <a class="logo" href="/">
+        <a
+            class="logo"
+            href="/"
+        >
             Recycle Here
         </a>
 
+
+        <button
+            class="menu-button"
+            type="button"
+            aria-expanded="false"
+            aria-controls="main-navigation"
+        >
+            Menu
+        </button>
+
+
         <nav
             class="site-nav"
-            aria-label="Área da empresa"
+            id="main-navigation"
+            aria-label="Navegação da área da empresa"
         >
 
             <ul class="nav-list">
 
                 <li>
-                    <a href="/empresa/pontos">
+
+                    <a href="/">
+                        Início
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="/pontos">
+                        Pontos de coleta
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a
+                        href="/empresa/pontos"
+                        aria-current="page"
+                    >
                         Meus pontos
                     </a>
+
                 </li>
+
 
                 <li>
 
                     <form
+                        class="nav-logout-form"
                         action="/logout"
                         method="post"
                     >
@@ -60,8 +107,8 @@
                         >
 
                         <button
+                            class="nav-logout-button"
                             type="submit"
-                            class="button-secondary"
                         >
                             Sair
                         </button>
@@ -77,7 +124,16 @@
     </header>
 
 
+
     <main class="points-page">
+
+        <a
+            class="back-link"
+            href="/"
+        >
+            Voltar para a página inicial
+        </a>
+
 
         <header class="points-page-header">
 
@@ -85,21 +141,46 @@
                 Meus pontos de coleta
             </h1>
 
+
             <p>
+
                 Empresa:
+
                 <strong>
+
                     <?= htmlspecialchars(
                         $company->name,
                         ENT_QUOTES,
                         'UTF-8'
                     ) ?>
+
                 </strong>
+
             </p>
 
         </header>
 
 
-        <section>
+
+        <section
+            class="search-results"
+            aria-labelledby="company-points-title"
+        >
+
+            <header class="section-header">
+
+                <h2 id="company-points-title">
+                    Pontos cadastrados
+                </h2>
+
+
+                <p>
+                    Gerencie os pontos de coleta
+                    cadastrados pela sua empresa.
+                </p>
+
+            </header>
+
 
             <p>
 
@@ -113,35 +194,47 @@
             </p>
 
 
+
             <?php if (empty($points)): ?>
+
 
                 <p>
                     Sua empresa ainda não possui
                     pontos de coleta cadastrados.
                 </p>
 
+
             <?php else: ?>
+
 
                 <div class="collection-points-grid">
 
-                    <?php foreach (
-                        $points as $point
-                    ): ?>
+
+                    <?php foreach ($points as $point): ?>
+
 
                         <article
                             class="collection-point-card"
                         >
 
-                            <h2>
+                            <h3>
+
                                 <?= htmlspecialchars(
                                     $point->name,
                                     ENT_QUOTES,
                                     'UTF-8'
                                 ) ?>
-                            </h2>
+
+                            </h3>
 
 
                             <p>
+
+                                <strong>
+                                    Localização:
+                                </strong>
+
+                                <br>
 
                                 <?= htmlspecialchars(
                                     $point->neighborhood,
@@ -162,6 +255,37 @@
 
                             <p>
 
+                                <strong>
+                                    Materiais aceitos:
+                                </strong>
+
+                                <br>
+
+                                <?= htmlspecialchars(
+                                    implode(
+                                        ', ',
+                                        $point->materials
+                                    ),
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+
+                            </p>
+
+
+                            <p>
+
+                                <a
+                                    href="/pontos/<?= (int) $point->id ?>"
+                                >
+                                    Ver página pública
+                                </a>
+
+                            </p>
+
+
+                            <p>
+
                                 <a
                                     href="/empresa/pontos/<?= (int) $point->id ?>/editar"
                                 >
@@ -172,15 +296,72 @@
 
                         </article>
 
+
                     <?php endforeach; ?>
+
 
                 </div>
 
+
             <?php endif; ?>
+
 
         </section>
 
     </main>
+
+
+
+    <footer class="site-footer">
+
+        <p>
+            Recycle Here
+        </p>
+
+
+        <nav
+            aria-label="Navegação do rodapé"
+        >
+
+            <ul class="footer-nav">
+
+                <li>
+
+                    <a href="/">
+                        Início
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="/pontos">
+                        Pontos de coleta
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="/empresa/pontos">
+                        Meus pontos
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <p>
+            Projeto acadêmico - 2026
+        </p>
+
+    </footer>
+
 
 
     <script src="/assets/js/main.js"></script>

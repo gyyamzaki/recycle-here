@@ -51,4 +51,16 @@ final class CollectionPointService
                 $companyId
             );
     }
+
+    public function createForCompany(
+        int $companyId,
+        array $data
+    ): int {
+
+        return $this->repository
+            ->createWithMaterials(
+                $companyId,
+                $data
+            );
+    }
 }

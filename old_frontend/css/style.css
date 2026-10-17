@@ -1,0 +1,893 @@
+:root {
+    --color-background: #ffffff;
+    --color-surface: #f5f7fa;
+    --color-text: #1f2937;
+    --color-text-muted: #5f6b7a;
+
+    --color-primary: #2563eb;
+    --color-primary-dark: #1d4ed8;
+
+    --color-border: #d9e0e8;
+
+    --content-width: 75rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: inherit;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+
+    color: var(--color-text);
+    background-color: var(--color-background);
+}
+
+.site-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+}
+
+.menu-button {
+    padding: 0.5rem 0.75rem;
+
+    font: inherit;
+    font-weight: 600;
+
+    color: var(--color-text);
+    background-color: transparent;
+
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+
+    cursor: pointer;
+}
+
+.menu-button:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+.site-nav {
+    display: none;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.site-nav.is-open {
+    display: block;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+/* Página atual na navegação */
+
+.nav-list a[aria-current="page"] {
+    color: var(--color-primary);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+}
+
+.nav-list a {
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-list a:hover {
+    color: var(--color-primary);
+}
+
+.hero{
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+}
+
+.hero h1{
+    margin: 0 0 1rem;
+    font-size:2.25rem;
+    line-height: 1.2;
+}
+
+.hero > p{
+    max-width: 38rem;
+    margin: 0 0 2rem;
+    color: var(--color-text-muted);
+}
+
+.search-form{
+    display: grid;
+    gap: 1rem;
+    
+    max-width: 45rem;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label{
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select{
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+
+    font: inherit;
+    color: var(--color-text);
+
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+}
+
+.search-form button {
+    padding: 0.8rem 1.2rem;
+
+    font: inherit;
+    font-weight: 700;
+
+    color: #ffffff;
+    background-color: var(--color-primary);
+
+    border: none;
+    border-radius: 0.5rem;
+
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.search-form button:focus-visible,
+.nav-list a:focus-visible,
+.logo:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+.materials-section {
+    padding: 4rem 1.5rem;
+    background-color: var(--color-surface);
+}
+
+.materials-section > * {
+    max-width: var(--content-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-header {
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.75rem;
+    line-height: 1.3;
+}
+
+.section-header p {
+    margin: 0;
+    color: var(--color-text-muted);
+}
+
+.materials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.material-card {
+    padding: 1.5rem;
+
+    background-color: var(--material-background);
+
+    border: 1px solid var(--color-border);
+    border-left: 0.5rem solid var(--material-color);
+    border-radius: 0.75rem;
+}
+
+.material-card h3 {
+    margin: 0 0 0.5rem;
+
+    font-size: 1.125rem;
+
+    color: var(--material-color);
+}
+
+.material-card p {
+    margin: 0;
+
+    color: var(--color-text-muted);
+}
+
+
+/* Papel */
+.material-paper {
+    --material-color: #2563eb;
+    --material-background: #eff6ff;
+}
+
+
+/* Plástico */
+.material-plastic {
+    --material-color: #c62828;
+    --material-background: #fef2f2;
+}
+
+
+/* Vidro */
+.material-glass {
+    --material-color: #15803d;
+    --material-background: #ecfdf5;
+}
+
+
+/* Metal */
+.material-metal {
+    --material-color: #b45309;
+    --material-background: #fffbeb;
+}
+
+
+/* Eletrônicos */
+.material-electronics {
+    --material-color: #475569;
+    --material-background: #f1f5f9;
+}
+
+
+/* Pilhas e baterias */
+.material-batteries {
+    --material-color: #6d28d9;
+    --material-background: #f5f3ff;
+}
+
+
+/* Óleo usado */
+.material-oil {
+    --material-color: #92400e;
+    --material-background: #fff7ed;
+}
+
+/* Informação complementar sobre reciclagem */
+
+.recycling-tip {
+    max-width: 50rem;
+
+    margin: 2rem auto 0;
+    padding: 1.25rem 1.5rem;
+
+    background: #eff6ff;
+
+    border-left: 0.3rem solid var(--color-primary);
+    border-radius: 0.5rem;
+}
+
+.recycling-tip h3 {
+    margin: 0 0 0.5rem;
+
+    font-size: 1.125rem;
+}
+
+.recycling-tip p {
+    margin: 0;
+
+    color: var(--color-text-muted);
+}
+
+.collection-point-section {
+    padding: 4rem 1.5rem;
+}
+
+.collection-point-section > * {
+    max-width: var(--content-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.collection-points-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.collection-point-card {
+    padding: 1.5rem;
+
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+
+    background-color: var(--color-background);
+}
+
+.collection-point-card h3 {
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+}
+
+.collection-point-card p {
+    margin: 0 0 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.collection-point-card strong {
+    color: var(--color-text);
+}
+
+.collection-point-card a {
+    display: inline-block;
+
+    margin-top: 0.5rem;
+    padding: 0.65rem 1rem;
+
+    font-weight: 600;
+    text-decoration: none;
+
+    color: var(--color-primary);
+
+    border: 1px solid var(--color-primary);
+    border-radius: 0.5rem;
+}
+
+.collection-point-card a:hover {
+    color: #ffffff;
+    background-color: var(--color-primary);
+}
+
+.collection-point-card a:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+.companies-section {
+    padding: 4rem 1.5rem;
+
+    color: #ffffff;
+    background-color: var(--color-primary);
+}
+
+.companies-section > * {
+    max-width: var(--content-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.companies-section .section-header p {
+    color: #e8efff;
+}
+
+.companies-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    margin-top: 2rem;
+}
+
+.companies-actions a {
+    display: inline-block;
+
+    padding: 0.75rem 1.25rem;
+
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+
+    border-radius: 0.5rem;
+}
+
+.button-primary-light {
+    color: var(--color-primary);
+    background-color: #ffffff;
+}
+
+.button-primary-light:hover {
+    background-color: #eef3ff;
+}
+
+.button-secondary-light {
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.button-secondary-light:hover {
+    color: var(--color-primary);
+    background-color: #ffffff;
+}
+
+.site-footer {
+    padding: 2rem 1.5rem;
+
+    color: var(--color-text-muted);
+    background-color: var(--color-surface);
+}
+
+.site-footer > * {
+    max-width: var(--content-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    margin: 1rem auto;
+    padding: 0;
+
+    list-style: none;
+}
+
+.footer-nav a {
+    text-decoration: none;
+}
+
+.footer-nav a:hover {
+    color: var(--color-primary);
+}
+
+.footer-nav a:focus-visible,
+.companies-actions a:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+.companies-actions a:focus-visible {
+    outline-color: #ffffff;
+}
+
+/* Página de detalhes do ponto */
+
+.point-details {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+
+    font-weight: 600;
+    text-decoration: none;
+
+    color: var(--color-primary);
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.back-link:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+.point-information {
+    max-width: 50rem;
+    padding: 2rem;
+
+    background-color: var(--color-background);
+
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+}
+
+.point-header {
+    margin-bottom: 2rem;
+}
+
+.point-header h1 {
+    margin: 0 0 0.5rem;
+
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.point-header p {
+    margin: 0;
+
+    color: var(--color-text-muted);
+}
+
+.point-information section {
+    padding: 1.5rem 0;
+
+    border-top: 1px solid var(--color-border);
+}
+
+.point-information section h2 {
+    margin: 0 0 0.75rem;
+
+    font-size: 1.25rem;
+}
+
+.point-information section p,
+.point-information address {
+    margin: 0;
+
+    color: var(--color-text-muted);
+}
+
+.point-information address {
+    font-style: normal;
+}
+
+.point-information ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.point-information a {
+    color: var(--color-primary);
+}
+
+.point-information a:hover {
+    color: var(--color-primary-dark);
+}
+
+.points-page {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+}
+
+.points-page-header {
+    margin-bottom: 2.5rem;
+}
+
+.points-page-header h1 {
+    margin: 0 0 0.75rem;
+    font-size: 2.25rem;
+    line-height: 1.2;
+}
+
+.points-page-header p {
+    max-width: 38rem;
+    margin: 0;
+
+    color: var(--color-text-muted);
+}
+
+.points-search {
+    margin-bottom: 3rem;
+}
+
+.points-search h2 {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+}
+
+.search-results {
+    margin-top: 3rem;
+}
+
+/* Páginas temporárias de cadastro e login */
+
+.simple-page {
+    max-width: var(--content-width);
+    min-height: 60vh;
+
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+}
+
+.simple-page h1 {
+    margin: 0 0 1rem;
+
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.simple-page p {
+    margin: 0;
+
+    color: var(--color-text-muted);
+}
+
+/* Páginas de formulário */
+
+.form-page {
+    max-width: var(--content-width);
+
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+}
+
+
+.form-page-header {
+    max-width: 42rem;
+
+    margin-bottom: 2rem;
+}
+
+
+.form-page-header h1 {
+    margin: 0 0 0.75rem;
+
+    font-size: 2.25rem;
+    line-height: 1.2;
+}
+
+
+.form-page-header p {
+    margin: 0;
+
+    color: var(--color-text-muted);
+}
+
+
+.form-section {
+    max-width: 42rem;
+
+    padding: 2rem;
+
+    background: var(--color-background);
+
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+}
+
+
+.form-section h2 {
+    margin: 0 0 1.5rem;
+
+    font-size: 1.5rem;
+}
+
+
+.company-form {
+    display: grid;
+
+    gap: 1.25rem;
+}
+
+
+.form-help {
+    color: var(--color-text-muted);
+}
+
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 1rem;
+
+    margin-top: 0.5rem;
+}
+
+
+.button-primary {
+    padding: 0.75rem 1.25rem;
+
+    font: inherit;
+    font-weight: 600;
+
+    color: #ffffff;
+
+    background: var(--color-primary);
+
+    border: none;
+    border-radius: 0.5rem;
+
+    cursor: pointer;
+}
+
+
+.button-primary:hover {
+    background: var(--color-primary-dark);
+}
+
+
+.button-primary:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+
+.form-login-link {
+    margin: 0;
+
+    color: var(--color-text-muted);
+}
+
+
+.form-login-link a {
+    font-weight: 600;
+
+    color: var(--color-primary);
+}
+
+
+.form-login-link a:hover {
+    color: var(--color-primary-dark);
+}
+
+@media (min-width: 48rem) {
+    .search-form {
+        grid-template-columns: 1fr 1fr auto;
+        align-items: end;
+    }
+
+    .materials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .collection-points-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .companies-actions {
+        flex-direction: row;
+    }
+
+    .companies-actions a {
+        width: auto;
+    }
+
+    .footer-nav {
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+
+    .menu-button {
+        display: none;
+    }
+
+    .site-nav {
+        display: block;
+        width: auto;
+        margin-top: 0;
+    }
+
+    .nav-list {
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 64rem) {
+    .materials-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .collection-points-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ------------------------------------------------------------
+   Logout na navegação
+------------------------------------------------------------ */
+
+.nav-logout-form {
+    margin: 0;
+}
+
+.nav-logout-button {
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+    background: transparent;
+
+    color: inherit;
+
+    font: inherit;
+
+    cursor: pointer;
+}
+
+.nav-logout-button:hover {
+    text-decoration: underline;
+}
+
+.nav-logout-button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+}
+
+/* ============================================================
+   Materiais do formulário de ponto de coleta
+   ============================================================ */
+
+.form-section .materials-fieldset .checkbox-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+
+    gap: 0.75rem !important;
+
+    width: 100%;
+    margin-top: 1rem;
+}
+
+
+.form-section .materials-fieldset .checkbox-option {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    gap: 0.6rem !important;
+
+    width: auto !important;
+    margin: 0 !important;
+
+    cursor: pointer;
+}
+
+
+.form-section .materials-fieldset .checkbox-option input[type="checkbox"] {
+    display: inline-block !important;
+
+    width: 16px !important;
+    height: 16px !important;
+
+    margin: 0 !important;
+
+    flex: 0 0 16px !important;
+
+    cursor: pointer;
+}
+
+
+.form-section .materials-fieldset .checkbox-option span {
+    display: inline !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    line-height: 1.4;
+}

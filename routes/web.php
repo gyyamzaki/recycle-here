@@ -55,3 +55,29 @@ $router->get(
     '/empresa/pontos',
     [CompanyPointController::class, 'index']
 );
+
+$router->get(
+    '/empresa/pontos',
+    [
+        CompanyPointController::class,
+        'index'
+    ]
+);
+
+
+$router->get(
+    '/empresa/pontos/novo',
+    [
+        CompanyPointController::class,
+        'create'
+    ]
+);
+
+
+$router->post(
+    '/empresa/pontos',
+    [
+        CompanyPointController::class,
+        'store'
+    ]
+);

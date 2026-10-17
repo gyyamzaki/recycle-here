@@ -404,4 +404,153 @@ final class CollectionPointRepository
 
         return $points;
     }
+
+    public function createWithMaterials(
+        int $companyId,
+        array $data
+    ): int {
+
+        try {
+
+            $this->connection
+                ->beginTransaction();
+
+
+            $sql = '
+                INSERT INTO collection_points
+                (
+                    company_id,
+                    name,
+                    street,
+                    number,
+                    complement,
+                    neighborhood,
+                    city,
+                    state,
+                    zip_code,
+                    phone,
+                    opening_hours,
+                    active
+                )
+                VALUES
+                (
+                    :company_id,
+                    :name,
+                    :street,
+                    :number,
+                    :complement,
+                    :neighborhood,
+                    :city,
+                    :state,
+                    :zip_code,
+                    :phone,
+                    :opening_hours,
+                    1
+                )
+            ';
+
+
+            $statement =
+                $this->connection
+                    ->prepare($sql);
+
+
+            $statement->execute([
+
+                'company_id' =>
+                    $companyId,
+
+                'name' =>
+                    $data['name'],
+
+                'street' =>
+                    $data['street'],
+
+                'number' =>
+                    $data['number'],
+
+                'complement' =>
+                    $data['complement'],
+
+                'neighborhood' =>
+                    $data['neighborhood'],
+
+                'city' =>
+                    $data['city'],
+
+                'state' =>
+                    $data['state'],
+
+                'zip_code' =>
+                    $data['zip_code'],
+
+                'phone' =>
+                    $data['phone'],
+
+                'opening_hours' =>
+                    $data['opening_hours']
+            ]);
+
+
+            $pointId =
+                (int) $this->connection
+                    ->lastInsertId();
+
+
+            $materialSql = '
+                INSERT INTO collection_point_material
+                (
+                    collection_point_id,
+                    material_id
+                )
+                VALUES
+                (
+                    :collection_point_id,
+                    :material_id
+                )
+            ';
+
+
+            $materialStatement =
+                $this->connection
+                    ->prepare($materialSql);
+
+
+            foreach (
+                $data['materials']
+                as $materialId
+            ) {
+
+                $materialStatement->execute([
+
+                    'collection_point_id' =>
+                        $pointId,
+
+                    'material_id' =>
+                        $materialId
+                ]);
+            }
+
+
+            $this->connection
+                ->commit();
+
+
+            return $pointId;
+
+        } catch (\Throwable $exception) {
+
+            if (
+                $this->connection
+                    ->inTransaction()
+            ) {
+
+                $this->connection
+                    ->rollBack();
+            }
+
+
+            throw $exception;
+        }
+    }
 }

@@ -1,6 +1,17 @@
+/* ============================================================
+   RECYCLE HERE
+   Folha de estilos principal
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   Variáveis globais
+------------------------------------------------------------ */
+
 :root {
     --color-background: #ffffff;
     --color-surface: #f5f7fa;
+
     --color-text: #1f2937;
     --color-text-muted: #5f6b7a;
 
@@ -9,28 +20,32 @@
 
     --color-border: #d9e0e8;
 
+    --color-error: #b91c1c;
+    --color-error-background: #fef2f2;
+    --color-error-border: #fecaca;
+
     --content-width: 75rem;
 }
+
+
+/* ------------------------------------------------------------
+   Configurações gerais
+------------------------------------------------------------ */
 
 * {
     box-sizing: border-box;
 }
 
+
 html {
     font-size: 100%;
+    scroll-behavior: smooth;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-a {
-    color: inherit;
-}
 
 body {
     margin: 0;
+
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
     line-height: 1.6;
@@ -39,22 +54,67 @@ body {
     background-color: var(--color-background);
 }
 
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+a {
+    color: inherit;
+}
+
+
+/* ------------------------------------------------------------
+   Cabeçalho
+------------------------------------------------------------ */
+
 .site-header {
     display: flex;
     flex-wrap: wrap;
+
     align-items: center;
     justify-content: space-between;
 
     max-width: var(--content-width);
+
     margin: 0 auto;
+
     padding: 1rem 1.5rem;
 }
 
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+/* ------------------------------------------------------------
+   Botão do menu mobile
+------------------------------------------------------------ */
+
 .menu-button {
-    padding: 0.5rem 0.75rem;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 2.75rem;
+    height: 2.75rem;
+
+    padding: 0;
 
     font: inherit;
-    font-weight: 600;
+
+    /*
+       A palavra "Menu" continua no HTML para acessibilidade,
+       mas visualmente mostramos apenas o ícone.
+    */
+    font-size: 0;
 
     color: var(--color-text);
     background-color: transparent;
@@ -65,30 +125,53 @@ body {
     cursor: pointer;
 }
 
+
+.menu-button::before {
+    content: "☰";
+
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+
+.menu-button:hover {
+    color: var(--color-primary);
+
+    border-color: var(--color-primary);
+}
+
+
 .menu-button:focus-visible {
     outline: 3px solid var(--color-primary);
     outline-offset: 3px;
 }
 
+
+/* ------------------------------------------------------------
+   Navegação principal
+------------------------------------------------------------ */
+
 .site-nav {
     display: none;
+
     width: 100%;
+
     margin-top: 1rem;
 }
 
+
+/* Classe adicionada pelo JavaScript ao abrir o menu */
 .site-nav.is-open {
     display: block;
 }
 
-.logo {
-    font-size: 1.25rem;
-    font-weight: 700;
-    text-decoration: none;
-}
 
 .nav-list {
     display: flex;
     flex-direction: column;
+
+    align-items: flex-start;
+
     gap: 0.75rem;
 
     margin: 0;
@@ -97,71 +180,170 @@ body {
     list-style: none;
 }
 
-/* Página atual na navegação */
 
-.nav-list a[aria-current="page"] {
-    color: var(--color-primary);
-    font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 0.3rem;
+.nav-list li {
+    margin: 0;
+    padding: 0;
 }
+
 
 .nav-list a {
-    text-decoration: none;
     font-weight: 500;
+
+    text-decoration: none;
 }
+
 
 .nav-list a:hover {
     color: var(--color-primary);
 }
 
-.hero{
+
+/* Página atual na navegação */
+
+.nav-list a[aria-current="page"] {
+    color: var(--color-primary);
+
+    font-weight: 700;
+
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+}
+
+
+.nav-list a:focus-visible,
+.logo:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+
+/* ------------------------------------------------------------
+   Botão de logout na navegação
+------------------------------------------------------------ */
+
+.nav-logout-form {
+    margin: 0;
+    padding: 0;
+}
+
+
+.nav-logout-button {
+    margin: 0;
+    padding: 0;
+
+    font: inherit;
+    font-weight: 500;
+
+    color: inherit;
+    background: transparent;
+
+    border: 0;
+
+    cursor: pointer;
+}
+
+
+.nav-logout-button:hover {
+    color: var(--color-primary);
+}
+
+
+.nav-logout-button:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+
+/* ------------------------------------------------------------
+   Hero
+------------------------------------------------------------ */
+
+.hero {
     max-width: var(--content-width);
+
     margin: 0 auto;
+
     padding: 4rem 1.5rem;
 }
 
-.hero h1{
+
+.hero h1 {
     margin: 0 0 1rem;
-    font-size:2.25rem;
+
+    font-size: 2.25rem;
     line-height: 1.2;
 }
 
-.hero > p{
+
+.hero > p {
     max-width: 38rem;
+
     margin: 0 0 2rem;
+
     color: var(--color-text-muted);
 }
 
-.search-form{
+
+/* ------------------------------------------------------------
+   Formulário de pesquisa
+------------------------------------------------------------ */
+
+.search-form {
     display: grid;
+
     gap: 1rem;
-    
+
     max-width: 45rem;
 }
 
-.form-group{
+
+/* ------------------------------------------------------------
+   Campos gerais de formulário
+------------------------------------------------------------ */
+
+.form-group {
     display: flex;
     flex-direction: column;
+
     gap: 0.4rem;
 }
 
-.form-group label{
+
+.form-group label {
     font-weight: 600;
 }
 
+
 .form-group input,
-.form-group select{
+.form-group select,
+.form-group textarea {
     width: 100%;
+
     padding: 0.75rem 0.9rem;
 
     font: inherit;
+
     color: var(--color-text);
 
     background-color: var(--color-background);
+
     border: 1px solid var(--color-border);
     border-radius: 0.5rem;
 }
+
+
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.form-group textarea:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+
+/* ------------------------------------------------------------
+   Botão da pesquisa
+------------------------------------------------------------ */
 
 .search-form button {
     padding: 0.8rem 1.2rem;
@@ -178,50 +360,79 @@ body {
     cursor: pointer;
 }
 
+
 .search-form button:hover {
     background-color: var(--color-primary-dark);
 }
 
-.form-group input:focus-visible,
-.form-group select:focus-visible,
-.search-form button:focus-visible,
-.nav-list a:focus-visible,
-.logo:focus-visible {
+
+.search-form button:focus-visible {
     outline: 3px solid var(--color-primary);
     outline-offset: 3px;
 }
 
-.materials-section {
-    padding: 4rem 1.5rem;
-    background-color: var(--color-surface);
-}
 
-.materials-section > * {
-    max-width: var(--content-width);
-    margin-left: auto;
-    margin-right: auto;
-}
+/* ------------------------------------------------------------
+   Cabeçalho das seções
+------------------------------------------------------------ */
 
 .section-header {
     margin-bottom: 2rem;
 }
 
+
+.section-header h1,
 .section-header h2 {
     margin: 0 0 0.5rem;
-    font-size: 1.75rem;
+
     line-height: 1.3;
 }
 
+
+.section-header h1 {
+    font-size: 2rem;
+}
+
+
+.section-header h2 {
+    font-size: 1.75rem;
+}
+
+
 .section-header p {
     margin: 0;
+
     color: var(--color-text-muted);
 }
 
+
+/* ------------------------------------------------------------
+   Seção de materiais
+------------------------------------------------------------ */
+
+.materials-section {
+    padding: 4rem 1.5rem;
+
+    background-color: var(--color-surface);
+}
+
+
+.materials-section > * {
+    max-width: var(--content-width);
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 .materials-grid {
     display: grid;
+
     grid-template-columns: 1fr;
+
     gap: 1rem;
 }
+
 
 .material-card {
     padding: 1.5rem;
@@ -230,8 +441,10 @@ body {
 
     border: 1px solid var(--color-border);
     border-left: 0.5rem solid var(--material-color);
+
     border-radius: 0.75rem;
 }
+
 
 .material-card h3 {
     margin: 0 0 0.5rem;
@@ -241,6 +454,7 @@ body {
     color: var(--material-color);
 }
 
+
 .material-card p {
     margin: 0;
 
@@ -249,6 +463,7 @@ body {
 
 
 /* Papel */
+
 .material-paper {
     --material-color: #2563eb;
     --material-background: #eff6ff;
@@ -256,6 +471,7 @@ body {
 
 
 /* Plástico */
+
 .material-plastic {
     --material-color: #c62828;
     --material-background: #fef2f2;
@@ -263,6 +479,7 @@ body {
 
 
 /* Vidro */
+
 .material-glass {
     --material-color: #15803d;
     --material-background: #ecfdf5;
@@ -270,6 +487,7 @@ body {
 
 
 /* Metal */
+
 .material-metal {
     --material-color: #b45309;
     --material-background: #fffbeb;
@@ -277,6 +495,7 @@ body {
 
 
 /* Eletrônicos */
+
 .material-electronics {
     --material-color: #475569;
     --material-background: #f1f5f9;
@@ -284,6 +503,7 @@ body {
 
 
 /* Pilhas e baterias */
+
 .material-batteries {
     --material-color: #6d28d9;
     --material-background: #f5f3ff;
@@ -291,17 +511,22 @@ body {
 
 
 /* Óleo usado */
+
 .material-oil {
     --material-color: #92400e;
     --material-background: #fff7ed;
 }
 
-/* Informação complementar sobre reciclagem */
+
+/* ------------------------------------------------------------
+   Informação complementar sobre reciclagem
+------------------------------------------------------------ */
 
 .recycling-tip {
     max-width: 50rem;
 
     margin: 2rem auto 0;
+
     padding: 1.25rem 1.5rem;
 
     background: #eff6ff;
@@ -310,11 +535,13 @@ body {
     border-radius: 0.5rem;
 }
 
+
 .recycling-tip h3 {
     margin: 0 0 0.5rem;
 
     font-size: 1.125rem;
 }
+
 
 .recycling-tip p {
     margin: 0;
@@ -322,52 +549,71 @@ body {
     color: var(--color-text-muted);
 }
 
+
+/* ------------------------------------------------------------
+   Pontos de coleta
+------------------------------------------------------------ */
+
 .collection-point-section {
     padding: 4rem 1.5rem;
 }
 
+
 .collection-point-section > * {
     max-width: var(--content-width);
+
     margin-left: auto;
     margin-right: auto;
 }
 
+
 .collection-points-grid {
     display: grid;
+
     grid-template-columns: 1fr;
+
     gap: 1.5rem;
 }
+
 
 .collection-point-card {
     padding: 1.5rem;
 
+    background-color: var(--color-background);
+
     border: 1px solid var(--color-border);
     border-radius: 0.75rem;
-
-    background-color: var(--color-background);
 }
+
 
 .collection-point-card h3 {
     margin: 0 0 1rem;
+
     font-size: 1.25rem;
 }
 
+
 .collection-point-card p {
     margin: 0 0 0.75rem;
+
     color: var(--color-text-muted);
 }
+
 
 .collection-point-card strong {
     color: var(--color-text);
 }
 
+
 .collection-point-card a {
     display: inline-block;
 
     margin-top: 0.5rem;
+
     padding: 0.65rem 1rem;
 
     font-weight: 600;
+
     text-decoration: none;
 
     color: var(--color-primary);
@@ -376,15 +622,23 @@ body {
     border-radius: 0.5rem;
 }
 
+
 .collection-point-card a:hover {
     color: #ffffff;
+
     background-color: var(--color-primary);
 }
+
 
 .collection-point-card a:focus-visible {
     outline: 3px solid var(--color-primary);
     outline-offset: 3px;
 }
+
+
+/* ------------------------------------------------------------
+   Área para empresas da Home
+------------------------------------------------------------ */
 
 .companies-section {
     padding: 4rem 1.5rem;
@@ -393,23 +647,29 @@ body {
     background-color: var(--color-primary);
 }
 
+
 .companies-section > * {
     max-width: var(--content-width);
+
     margin-left: auto;
     margin-right: auto;
 }
+
 
 .companies-section .section-header p {
     color: #e8efff;
 }
 
+
 .companies-actions {
     display: flex;
     flex-direction: column;
+
     gap: 1rem;
 
     margin-top: 2rem;
 }
+
 
 .companies-actions a {
     display: inline-block;
@@ -417,30 +677,49 @@ body {
     padding: 0.75rem 1.25rem;
 
     font-weight: 600;
+
     text-align: center;
     text-decoration: none;
 
     border-radius: 0.5rem;
 }
 
+
 .button-primary-light {
     color: var(--color-primary);
+
     background-color: #ffffff;
 }
+
 
 .button-primary-light:hover {
     background-color: #eef3ff;
 }
 
+
 .button-secondary-light {
     color: #ffffff;
+
     border: 1px solid #ffffff;
 }
 
+
 .button-secondary-light:hover {
     color: var(--color-primary);
+
     background-color: #ffffff;
 }
+
+
+.companies-actions a:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 3px;
+}
+
+
+/* ------------------------------------------------------------
+   Rodapé
+------------------------------------------------------------ */
 
 .site-footer {
     padding: 2rem 1.5rem;
@@ -449,15 +728,19 @@ body {
     background-color: var(--color-surface);
 }
 
+
 .site-footer > * {
     max-width: var(--content-width);
+
     margin-left: auto;
     margin-right: auto;
 }
 
+
 .footer-nav {
     display: flex;
     flex-direction: column;
+
     gap: 0.75rem;
 
     margin: 1rem auto;
@@ -466,53 +749,63 @@ body {
     list-style: none;
 }
 
+
 .footer-nav a {
     text-decoration: none;
 }
+
 
 .footer-nav a:hover {
     color: var(--color-primary);
 }
 
-.footer-nav a:focus-visible,
-.companies-actions a:focus-visible {
+
+.footer-nav a:focus-visible {
     outline: 3px solid var(--color-primary);
     outline-offset: 3px;
 }
 
-.companies-actions a:focus-visible {
-    outline-color: #ffffff;
-}
 
-/* Página de detalhes do ponto */
+/* ------------------------------------------------------------
+   Página de detalhes do ponto
+------------------------------------------------------------ */
 
 .point-details {
     max-width: var(--content-width);
+
     margin: 0 auto;
+
     padding: 3rem 1.5rem 4rem;
 }
 
+
 .back-link {
     display: inline-block;
+
     margin-bottom: 1.5rem;
 
     font-weight: 600;
+
     text-decoration: none;
 
     color: var(--color-primary);
 }
 
+
 .back-link:hover {
     text-decoration: underline;
 }
+
 
 .back-link:focus-visible {
     outline: 3px solid var(--color-primary);
     outline-offset: 3px;
 }
 
+
 .point-information {
     max-width: 50rem;
+
     padding: 2rem;
 
     background-color: var(--color-background);
@@ -521,9 +814,11 @@ body {
     border-radius: 0.75rem;
 }
 
+
 .point-header {
     margin-bottom: 2rem;
 }
+
 
 .point-header h1 {
     margin: 0 0 0.5rem;
@@ -532,11 +827,13 @@ body {
     line-height: 1.2;
 }
 
+
 .point-header p {
     margin: 0;
 
     color: var(--color-text-muted);
 }
+
 
 .point-information section {
     padding: 1.5rem 0;
@@ -544,11 +841,13 @@ body {
     border-top: 1px solid var(--color-border);
 }
 
+
 .point-information section h2 {
     margin: 0 0 0.75rem;
 
     font-size: 1.25rem;
 }
+
 
 .point-information section p,
 .point-information address {
@@ -557,68 +856,94 @@ body {
     color: var(--color-text-muted);
 }
 
+
 .point-information address {
     font-style: normal;
 }
 
+
 .point-information ul {
     margin: 0;
+
     padding-left: 1.25rem;
 }
+
 
 .point-information a {
     color: var(--color-primary);
 }
 
+
 .point-information a:hover {
     color: var(--color-primary-dark);
 }
 
+
+/* ------------------------------------------------------------
+   Página de listagem dos pontos
+------------------------------------------------------------ */
+
 .points-page {
     max-width: var(--content-width);
+
     margin: 0 auto;
+
     padding: 3rem 1.5rem 4rem;
 }
+
 
 .points-page-header {
     margin-bottom: 2.5rem;
 }
 
+
 .points-page-header h1 {
     margin: 0 0 0.75rem;
+
     font-size: 2.25rem;
     line-height: 1.2;
 }
 
+
 .points-page-header p {
     max-width: 38rem;
+
     margin: 0;
 
     color: var(--color-text-muted);
 }
 
+
 .points-search {
     margin-bottom: 3rem;
 }
 
+
 .points-search h2 {
     margin: 0 0 1rem;
+
     font-size: 1.5rem;
 }
+
 
 .search-results {
     margin-top: 3rem;
 }
 
-/* Páginas temporárias de cadastro e login */
+
+/* ------------------------------------------------------------
+   Páginas simples
+------------------------------------------------------------ */
 
 .simple-page {
     max-width: var(--content-width);
     min-height: 60vh;
 
     margin: 0 auto;
+
     padding: 3rem 1.5rem 4rem;
 }
+
 
 .simple-page h1 {
     margin: 0 0 1rem;
@@ -627,18 +952,23 @@ body {
     line-height: 1.2;
 }
 
+
 .simple-page p {
     margin: 0;
 
     color: var(--color-text-muted);
 }
 
-/* Páginas de formulário */
+
+/* ------------------------------------------------------------
+   Páginas de formulário
+------------------------------------------------------------ */
 
 .form-page {
     max-width: var(--content-width);
 
     margin: 0 auto;
+
     padding: 3rem 1.5rem 4rem;
 }
 
@@ -677,6 +1007,11 @@ body {
 }
 
 
+.form-section h1 {
+    margin-top: 0;
+}
+
+
 .form-section h2 {
     margin: 0 0 1.5rem;
 
@@ -684,7 +1019,12 @@ body {
 }
 
 
-.company-form {
+/*
+   Formulários das páginas de login,
+   cadastro e pontos.
+*/
+.company-form,
+.form-section form {
     display: grid;
 
     gap: 1.25rem;
@@ -695,6 +1035,10 @@ body {
     color: var(--color-text-muted);
 }
 
+
+/* ------------------------------------------------------------
+   Ações dos formulários
+------------------------------------------------------------ */
 
 .form-actions {
     display: flex;
@@ -708,11 +1052,25 @@ body {
 }
 
 
+.form-actions .back-link {
+    margin-bottom: 0;
+}
+
+
+/* ------------------------------------------------------------
+   Botão principal
+------------------------------------------------------------ */
+
 .button-primary {
+    display: inline-block;
+
     padding: 0.75rem 1.25rem;
 
     font: inherit;
     font-weight: 600;
+
+    text-align: center;
+    text-decoration: none;
 
     color: #ffffff;
 
@@ -726,6 +1084,8 @@ body {
 
 
 .button-primary:hover {
+    color: #ffffff;
+
     background: var(--color-primary-dark);
 }
 
@@ -735,6 +1095,10 @@ body {
     outline-offset: 3px;
 }
 
+
+/* ------------------------------------------------------------
+   Link abaixo do login
+------------------------------------------------------------ */
 
 .form-login-link {
     margin: 0;
@@ -754,55 +1118,265 @@ body {
     color: var(--color-primary-dark);
 }
 
+
+/* ------------------------------------------------------------
+   Mensagens de erro
+------------------------------------------------------------ */
+
+.form-errors {
+    margin-bottom: 1.5rem;
+
+    padding: 1rem 1.25rem;
+
+    color: var(--color-error);
+
+    background-color: var(--color-error-background);
+
+    border: 1px solid var(--color-error-border);
+    border-left: 0.3rem solid var(--color-error);
+
+    border-radius: 0.5rem;
+}
+
+
+.form-errors strong {
+    display: block;
+
+    margin-bottom: 0.5rem;
+}
+
+
+.form-errors ul {
+    margin: 0;
+
+    padding-left: 1.25rem;
+}
+
+
+/* ------------------------------------------------------------
+   Seleção dos materiais no cadastro/edição de ponto
+------------------------------------------------------------ */
+
+.materials-fieldset {
+    margin: 1.5rem 0;
+
+    padding: 1.25rem;
+
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+}
+
+
+.materials-fieldset legend {
+    padding: 0 0.5rem;
+
+    font-weight: 700;
+}
+
+
+.materials-fieldset > p {
+    margin: 0 0 1rem;
+
+    color: var(--color-text-muted);
+}
+
+
+/*
+   IMPORTANTE:
+   Um material por linha em qualquer resolução.
+*/
+.checkbox-grid {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 0.75rem;
+
+    width: 100%;
+}
+
+
+/*
+   Mantém o quadrado e o nome
+   do mesmo material juntos.
+*/
+.checkbox-option {
+    display: flex;
+
+    flex-direction: row;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 0.65rem;
+
+    width: auto;
+
+    margin: 0;
+
+    cursor: pointer;
+}
+
+
+/*
+   Impede que outras regras de input
+   aumentem ou deformem o checkbox.
+*/
+.checkbox-option input[type="checkbox"] {
+    flex: 0 0 1rem;
+
+    width: 1rem;
+    height: 1rem;
+
+    margin: 0;
+
+    padding: 0;
+
+    cursor: pointer;
+}
+
+
+.checkbox-option span {
+    margin: 0;
+    padding: 0;
+
+    line-height: 1.4;
+}
+
+
+/* ------------------------------------------------------------
+   Breakpoint: tablets e desktops
+------------------------------------------------------------ */
+
 @media (min-width: 48rem) {
+
     .search-form {
         grid-template-columns: 1fr 1fr auto;
+
         align-items: end;
     }
+
 
     .materials-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
+
     .collection-points-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
 
     .companies-actions {
         flex-direction: row;
     }
 
+
     .companies-actions a {
         width: auto;
     }
 
+
     .footer-nav {
         flex-direction: row;
+
         gap: 1.5rem;
     }
 
+
+    /*
+       Em telas maiores não precisamos
+       do botão de menu.
+    */
     .menu-button {
         display: none;
     }
 
+
+    /*
+       Navegação horizontal no desktop.
+    */
     .site-nav {
         display: block;
+
         width: auto;
+
         margin-top: 0;
     }
 
+
     .nav-list {
         flex-direction: row;
+
+        align-items: center;
+
         gap: 1.5rem;
+    }
+
+
+    .form-actions {
+        flex-direction: row;
+
+        align-items: center;
     }
 }
 
+
+/* ------------------------------------------------------------
+   Breakpoint: telas grandes
+------------------------------------------------------------ */
+
 @media (min-width: 64rem) {
+
     .materials-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 
+
     .collection-points-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* ------------------------------------------------------------
+   Ajustes para celulares pequenos
+------------------------------------------------------------ */
+
+@media (max-width: 30rem) {
+
+    .hero {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+
+    .hero h1,
+    .points-page-header h1,
+    .form-page-header h1 {
+        font-size: 1.8rem;
+    }
+
+
+    .form-section {
+        padding: 1.25rem;
+    }
+
+
+    .point-information {
+        padding: 1.25rem;
+    }
+
+
+    .materials-fieldset {
+        padding: 1rem;
+    }
+
+
+    .collection-point-card {
+        padding: 1.25rem;
     }
 }
