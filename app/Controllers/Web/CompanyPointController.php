@@ -271,4 +271,238 @@ final class CompanyPointController
 
         return $company;
     }
+
+    public function edit(
+        Request $request,
+        string $id
+    ): void {
+
+        $company =
+            $this->currentCompany();
+
+
+        if (
+            !ctype_digit($id)
+            ||
+            (int) $id <= 0
+        ) {
+
+            Response::status(404);
+
+            require dirname(__DIR__, 2)
+                . '/Views/errors/404.php';
+
+            return;
+        }
+
+
+        $pointId =
+            (int) $id;
+
+
+        /*
+        * Além de buscar o ponto,
+        * verifica se pertence à empresa atual.
+        */
+        $point =
+            $this->pointService
+                ->findForCompany(
+                    $pointId,
+                    $company->id
+                );
+
+
+        if ($point === null) {
+
+            Response::status(404);
+
+            require dirname(__DIR__, 2)
+                . '/Views/errors/404.php';
+
+            return;
+        }
+
+
+        $materials =
+            $this->materialService
+                ->listActive();
+
+
+        /*
+        * Converte os slugs atuais do ponto
+        * para IDs usados pelos checkboxes.
+        */
+        $selectedMaterials = [];
+
+        foreach ($materials as $material) {
+
+            if (
+                in_array(
+                    $material->slug,
+                    $point->materialSlugs,
+                    true
+                )
+            ) {
+                $selectedMaterials[] =
+                    (int) $material->id;
+            }
+        }
+
+
+        $errors = [];
+
+
+        $old = [
+            'name' => $point->name,
+            'street' => $point->street,
+            'number' => $point->number,
+            'complement' => $point->complement ?? '',
+            'neighborhood' => $point->neighborhood,
+            'city' => $point->city,
+            'state' => $point->state,
+            'zip_code' => $point->zipCode ?? '',
+            'phone' => $point->phone ?? '',
+            'opening_hours' => $point->openingHours,
+            'materials' => $selectedMaterials
+        ];
+
+
+        require dirname(__DIR__, 2)
+            . '/Views/company/points/edit.php';
+    }
+
+    public function update(
+        Request $request,
+        string $id
+    ): void {
+
+        $company =
+            $this->currentCompany();
+
+
+        if (
+            !ctype_digit($id)
+            ||
+            (int) $id <= 0
+        ) {
+
+            Response::status(404);
+
+            require dirname(__DIR__, 2)
+                . '/Views/errors/404.php';
+
+            return;
+        }
+
+
+        $pointId =
+            (int) $id;
+
+
+        /*
+        * Primeiro confirma que o ponto pertence
+        * à empresa autenticada.
+        */
+        $point =
+            $this->pointService
+                ->findForCompany(
+                    $pointId,
+                    $company->id
+                );
+
+
+        if ($point === null) {
+
+            Response::status(404);
+
+            require dirname(__DIR__, 2)
+                . '/Views/errors/404.php';
+
+            return;
+        }
+
+
+        /*
+        * Proteção CSRF.
+        */
+        $csrf =
+            (string) $request->input(
+                '_csrf',
+                ''
+            );
+
+
+        if (!Csrf::validate($csrf)) {
+
+            Response::status(403);
+
+            require dirname(__DIR__, 2)
+                . '/Views/errors/403.php';
+
+            return;
+        }
+
+
+        /*
+        * Materiais válidos existentes no banco.
+        */
+        $materials =
+            $this->materialService
+                ->listActive();
+
+
+        $validMaterialIds =
+            array_map(
+                static fn ($material): int =>
+                    (int) $material->id,
+                $materials
+            );
+
+
+        /*
+        * Reutilizamos exatamente o mesmo
+        * Validator utilizado no CREATE.
+        */
+        $result =
+            CollectionPointValidator::validate(
+                $request->input(),
+                $validMaterialIds
+            );
+
+
+        $data =
+            $result['data'];
+
+
+        $errors =
+            $result['errors'];
+
+
+        if (!empty($errors)) {
+
+            Response::status(400);
+
+            $old =
+                $data;
+
+
+            require dirname(__DIR__, 2)
+                . '/Views/company/points/edit.php';
+
+            return;
+        }
+
+
+        $this->pointService
+            ->updateForCompany(
+                $pointId,
+                $company->id,
+                $data
+            );
+
+
+        Response::redirect(
+            '/empresa/pontos'
+        );
+    }
 }

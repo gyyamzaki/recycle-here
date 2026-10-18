@@ -81,3 +81,20 @@ $router->post(
         'store'
     ]
 );
+
+$router->get(
+    '/empresa/pontos/{id}/editar',
+    [
+        CompanyPointController::class,
+        'edit'
+    ]
+);
+
+
+$router->post(
+    '/empresa/pontos/{id}/editar',
+    [
+        CompanyPointController::class,
+        'update'
+    ]
+);

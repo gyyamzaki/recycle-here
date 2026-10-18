@@ -553,4 +553,114 @@ final class CollectionPointRepository
             throw $exception;
         }
     }
+
+    public function updateWithMaterials(
+        int $pointId,
+        int $companyId,
+        array $data
+    ): void {
+
+        try {
+
+            $this->connection->beginTransaction();
+
+
+            $sql = '
+                UPDATE collection_points
+                SET
+                    name = :name,
+                    street = :street,
+                    number = :number,
+                    complement = :complement,
+                    neighborhood = :neighborhood,
+                    city = :city,
+                    state = :state,
+                    zip_code = :zip_code,
+                    phone = :phone,
+                    opening_hours = :opening_hours,
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE
+                    id = :id
+                    AND company_id = :company_id
+            ';
+
+
+            $statement =
+                $this->connection->prepare($sql);
+
+
+            $statement->execute([
+                'name' => $data['name'],
+                'street' => $data['street'],
+                'number' => $data['number'],
+                'complement' => $data['complement'],
+                'neighborhood' => $data['neighborhood'],
+                'city' => $data['city'],
+                'state' => $data['state'],
+                'zip_code' => $data['zip_code'],
+                'phone' => $data['phone'],
+                'opening_hours' => $data['opening_hours'],
+
+                'id' => $pointId,
+                'company_id' => $companyId
+            ]);
+
+
+            /*
+            * Remove as relações antigas.
+            */
+            $deleteMaterials =
+                $this->connection->prepare(
+                    '
+                        DELETE FROM collection_point_material
+                        WHERE collection_point_id = :point_id
+                    '
+                );
+
+
+            $deleteMaterials->execute([
+                'point_id' => $pointId
+            ]);
+
+
+            /*
+            * Grava novamente os materiais selecionados.
+            */
+            $insertMaterial =
+                $this->connection->prepare(
+                    '
+                        INSERT INTO collection_point_material
+                        (
+                            collection_point_id,
+                            material_id
+                        )
+                        VALUES
+                        (
+                            :point_id,
+                            :material_id
+                        )
+                    '
+                );
+
+
+            foreach ($data['materials'] as $materialId) {
+
+                $insertMaterial->execute([
+                    'point_id' => $pointId,
+                    'material_id' => $materialId
+                ]);
+            }
+
+
+            $this->connection->commit();
+
+        } catch (\Throwable $exception) {
+
+            if ($this->connection->inTransaction()) {
+                $this->connection->rollBack();
+            }
+
+            throw $exception;
+        }
+    }
 }

@@ -63,4 +63,41 @@ final class CollectionPointService
                 $data
             );
     }
+
+    public function findForCompany(
+        int $pointId,
+        int $companyId
+    ): ?\App\Models\CollectionPoint {
+
+        $point =
+            $this->repository
+                ->findActiveById($pointId);
+
+
+        if (
+            $point === null
+            ||
+            $point->companyId !== $companyId
+        ) {
+            return null;
+        }
+
+
+        return $point;
+    }
+
+
+    public function updateForCompany(
+        int $pointId,
+        int $companyId,
+        array $data
+    ): void {
+
+        $this->repository
+            ->updateWithMaterials(
+                $pointId,
+                $companyId,
+                $data
+            );
+    }
 }

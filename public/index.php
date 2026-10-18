@@ -1,5 +1,12 @@
 <?php
 
+/*Comando para iniciar o host local:
+
+        C:\xampp\php\php.exe -S localhost:8000 -t public public/index.php 
+
+*/
+
+
 declare(strict_types=1);
 
 use App\Core\Request;
