@@ -7,6 +7,7 @@ namespace App\Controllers\Web;
 use App\Core\Csrf;
 use App\Core\Request;
 use App\Core\Response;
+use App\Core\Session;
 use App\Services\AuthService;
 use App\Validators\AuthValidator;
 
@@ -41,6 +42,9 @@ final class AuthController
         Request $request
     ): void {
 
+        /*
+         * Proteção CSRF.
+         */
         if (
             !Csrf::validate(
                 $request->input('_csrf')
@@ -55,6 +59,9 @@ final class AuthController
         }
 
 
+        /*
+         * Validação dos dados recebidos.
+         */
         $validation =
             $this->validator
                 ->validateLogin(
@@ -81,6 +88,9 @@ final class AuthController
             $validation['data'];
 
 
+        /*
+         * Verifica e-mail e senha.
+         */
         if (
             !$this->authService->login(
                 $data['email'],
@@ -101,6 +111,36 @@ final class AuthController
         }
 
 
+        /*
+         * Após login bem-sucedido,
+         * identifica o perfil salvo na sessão.
+         */
+        $user =
+            Session::get('user');
+
+
+        /*
+         * Administrador vai para
+         * a área administrativa.
+         */
+        if (
+            is_array($user)
+            &&
+            ($user['role'] ?? null) === 'admin'
+        ) {
+
+            Response::redirect(
+                '/admin'
+            );
+
+            return;
+        }
+
+
+        /*
+         * Empresa vai para a área
+         * de gerenciamento de pontos.
+         */
         Response::redirect(
             '/empresa/pontos'
         );
@@ -122,6 +162,9 @@ final class AuthController
         Request $request
     ): void {
 
+        /*
+         * Proteção CSRF.
+         */
         if (
             !Csrf::validate(
                 $request->input('_csrf')
@@ -136,6 +179,9 @@ final class AuthController
         }
 
 
+        /*
+         * Validação do cadastro.
+         */
         $validation =
             $this->validator
                 ->validateRegister(
@@ -158,6 +204,10 @@ final class AuthController
         }
 
 
+        /*
+         * Cadastro público sempre cria
+         * usuário do perfil company.
+         */
         $result =
             $this->authService
                 ->registerCompany(
@@ -190,6 +240,9 @@ final class AuthController
         Request $request
     ): void {
 
+        /*
+         * Logout também exige CSRF.
+         */
         if (
             !Csrf::validate(
                 $request->input('_csrf')
@@ -213,3 +266,4 @@ final class AuthController
         );
     }
 }
+

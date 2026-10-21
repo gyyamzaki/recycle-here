@@ -29,13 +29,19 @@ final class HomeController
         Request $request
     ): void {
 
-        // Busca os materiais ativos para o formulário de pesquisa.
+        /*
+         * Busca os materiais ativos
+         * para o formulário de pesquisa.
+         */
         $materials =
             $this->materialService
                 ->listActive();
 
 
-        // Mostra até três pontos de coleta na página inicial.
+        /*
+         * Mostra até três pontos de coleta
+         * na página inicial.
+         */
         $featuredPoints =
             array_slice(
                 $this->pointService
@@ -45,16 +51,30 @@ final class HomeController
             );
 
 
-        // Verifica se existe um usuário autenticado.
+        /*
+         * Verifica se existe usuário
+         * autenticado na sessão.
+         */
         $user =
             Session::get('user');
 
 
-        // Só considera logado na área da empresa
-        // quando a sessão existe e o perfil é "company".
+        /*
+         * Empresa autenticada.
+         */
         $isCompanyLogged =
-            is_array($user) &&
+            is_array($user)
+            &&
             ($user['role'] ?? null) === 'company';
+
+
+        /*
+         * Administrador autenticado.
+         */
+        $isAdminLogged =
+            is_array($user)
+            &&
+            ($user['role'] ?? null) === 'admin';
 
 
         require dirname(__DIR__, 2)

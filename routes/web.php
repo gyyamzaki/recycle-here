@@ -6,6 +6,7 @@ use App\Controllers\Web\AuthController;
 use App\Controllers\Web\HomeController;
 use App\Controllers\Web\PointController;
 use App\Controllers\Web\CompanyPointController;
+use App\Controllers\Web\AdminController;
 
 /** @var App\Core\Router $router */
 
@@ -104,5 +105,13 @@ $router->post(
     [
         CompanyPointController::class,
         'destroy'
+    ]
+);
+
+$router->get(
+    '/admin',
+    [
+        AdminController::class,
+        'index'
     ]
 );

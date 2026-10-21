@@ -1,8 +1,16 @@
 <?php
 
-$materials = $materials ?? [];
-$featuredPoints = $featuredPoints ?? [];
-$isCompanyLogged = $isCompanyLogged ?? false;
+$materials =
+    $materials ?? [];
+
+$featuredPoints =
+    $featuredPoints ?? [];
+
+$isCompanyLogged =
+    $isCompanyLogged ?? false;
+
+$isAdminLogged =
+    $isAdminLogged ?? false;
 
 ?>
 
@@ -102,6 +110,14 @@ $isCompanyLogged = $isCompanyLogged ?? false;
                     <li>
                         <a href="/empresa/pontos">
                             Meus pontos
+                        </a>
+                    </li>
+
+                <?php elseif ($isAdminLogged): ?>
+
+                    <li>
+                        <a href="/admin">
+                            Administração
                         </a>
                     </li>
 
@@ -244,10 +260,8 @@ $isCompanyLogged = $isCompanyLogged ?? false;
                 >
 
                 <figcaption>
-
                     A separação dos materiais facilita
                     o encaminhamento correto para reciclagem.
-
                 </figcaption>
 
             </figure>
@@ -540,10 +554,8 @@ $isCompanyLogged = $isCompanyLogged ?? false;
             <header class="section-header">
 
                 <h2 id="companies-title">
-
                     Você representa uma empresa
                     ou cooperativa?
-
                 </h2>
 
 
@@ -553,6 +565,15 @@ $isCompanyLogged = $isCompanyLogged ?? false;
                         Acesse sua área para cadastrar
                         e gerenciar seus pontos de coleta.
                     </p>
+
+
+                <?php elseif ($isAdminLogged): ?>
+
+                    <p>
+                        Você está autenticado como
+                        administrador do Recycle Here.
+                    </p>
+
 
                 <?php else: ?>
 
@@ -579,6 +600,17 @@ $isCompanyLogged = $isCompanyLogged ?? false;
                         href="/empresa/pontos"
                     >
                         Meus pontos
+                    </a>
+
+
+                <?php elseif ($isAdminLogged): ?>
+
+
+                    <a
+                        class="button-primary-light"
+                        href="/admin"
+                    >
+                        Área administrativa
                     </a>
 
 
@@ -632,17 +664,20 @@ $isCompanyLogged = $isCompanyLogged ?? false;
                     </a>
                 </li>
 
+
                 <li>
                     <a href="/#pontos">
                         Pontos de coleta
                     </a>
                 </li>
 
+
                 <li>
                     <a href="/#materiais">
                         Materiais
                     </a>
                 </li>
+
 
                 <li>
                     <a href="/#empresas">
@@ -656,6 +691,15 @@ $isCompanyLogged = $isCompanyLogged ?? false;
                     <li>
                         <a href="/empresa/pontos">
                             Meus pontos
+                        </a>
+                    </li>
+
+
+                <?php elseif ($isAdminLogged): ?>
+
+                    <li>
+                        <a href="/admin">
+                            Administração
                         </a>
                     </li>
 

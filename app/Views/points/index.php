@@ -1,28 +1,67 @@
 <?php
 
-$filters = $filters ?? ['bairro' => '', 'material' => ''];
-$errors = $errors ?? [];
-$materials = $materials ?? [];
-$points = $points ?? [];
+/*
+ * Estado de autenticação utilizado
+ * apenas para adaptar a navegação.
+ */
+$user =
+    App\Core\Session::get('user');
+
+
+$isCompanyLogged =
+    is_array($user)
+    &&
+    ($user['role'] ?? null) === 'company';
+
+
+$isAdminLogged =
+    is_array($user)
+    &&
+    ($user['role'] ?? null) === 'admin';
 
 ?>
+
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Encontre pontos de coleta e reciclagem em Sorocaba.">
 
-    <title>Pontos de coleta | Recycle Here</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <meta
+        name="description"
+        content="Encontre pontos de coleta e reciclagem em Sorocaba."
+    >
+
+    <title>
+        Pontos de coleta | Recycle Here
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/assets/css/style.css"
+    >
+
 </head>
+
 
 <body>
 
     <header class="site-header">
-        <a class="logo" href="/">Recycle Here</a>
+
+        <a
+            class="logo"
+            href="/"
+        >
+            Recycle Here
+        </a>
+
 
         <button
             class="menu-button"
@@ -33,52 +72,121 @@ $points = $points ?? [];
             Menu
         </button>
 
+
         <nav
             class="site-nav"
             id="main-navigation"
             aria-label="Navegação principal"
         >
+
             <ul class="nav-list">
-                <li><a href="/">Início</a></li>
-                <li><a href="/#materiais">Materiais</a></li>
-                <li><a href="/pontos" aria-current="page">Pontos de coleta</a></li>
-                <li><a href="/#empresas">Para empresas</a></li>
+
+                <li>
+                    <a href="/">
+                        Início
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="/#materiais">
+                        Materiais
+                    </a>
+                </li>
+
+
+                <li>
+                    <a
+                        href="/pontos"
+                        aria-current="page"
+                    >
+                        Pontos de coleta
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="/#empresas">
+                        Para empresas
+                    </a>
+                </li>
+
+
+                <?php if ($isCompanyLogged): ?>
+
+                    <li>
+                        <a href="/empresa/pontos">
+                            Meus pontos
+                        </a>
+                    </li>
+
+
+                <?php elseif ($isAdminLogged): ?>
+
+                    <li>
+                        <a href="/admin">
+                            Administração
+                        </a>
+                    </li>
+
+                <?php endif; ?>
+
             </ul>
+
         </nav>
+
     </header>
+
+
 
     <main class="points-page">
 
-        <a class="back-link" href="/">
+        <a
+            class="back-link"
+            href="/"
+        >
             Voltar para a página inicial
         </a>
 
+
         <header class="points-page-header">
-            <h1>Pontos de coleta</h1>
+
+            <h1>
+                Pontos de coleta
+            </h1>
+
 
             <p>
                 Encontre locais adequados para descartar
                 seus materiais em Sorocaba.
             </p>
+
         </header>
+
+
 
         <section
             class="points-search"
             aria-labelledby="points-search-title"
         >
+
             <h2 id="points-search-title">
                 Pesquisar pontos
             </h2>
+
 
             <form
                 class="search-form"
                 action="/pontos"
                 method="get"
             >
+
                 <div class="form-group">
+
                     <label for="bairro">
                         Bairro ou região
                     </label>
+
 
                     <input
                         type="text"
@@ -92,12 +200,16 @@ $points = $points ?? [];
                             'UTF-8'
                         ) ?>"
                     >
+
                 </div>
 
+
                 <div class="form-group">
+
                     <label for="material">
                         Material
                     </label>
+
 
                     <select
                         id="material"
@@ -119,7 +231,8 @@ $points = $points ?? [];
                                 ) ?>"
 
                                 <?php if (
-                                    ($filters['material'] ?? '') ===
+                                    ($filters['material'] ?? '')
+                                    ===
                                     $material->slug
                                 ): ?>
 
@@ -138,13 +251,18 @@ $points = $points ?? [];
 
                         <?php endforeach; ?>
 
-                    </select>  
+                    </select>
+
                 </div>
+
 
                 <button type="submit">
                     Buscar
                 </button>
+
             </form>
+
+
 
             <?php if (!empty($errors)): ?>
 
@@ -156,11 +274,13 @@ $points = $points ?? [];
                     <?php foreach ($errors as $error): ?>
 
                         <p>
+
                             <?= htmlspecialchars(
                                 $error,
                                 ENT_QUOTES,
                                 'UTF-8'
                             ) ?>
+
                         </p>
 
                     <?php endforeach; ?>
@@ -168,55 +288,79 @@ $points = $points ?? [];
                 </div>
 
             <?php endif; ?>
+
         </section>
+
+
 
         <section
             class="search-results"
             aria-labelledby="results-title"
         >
+
             <header class="section-header">
+
                 <h2 id="results-title">
                     Resultados encontrados
                 </h2>
 
+
                 <p id="results-description">
+
 
                     <?php if (!empty($errors)): ?>
 
+
                         Corrija os filtros informados.
 
+
                     <?php elseif (count($points) === 0): ?>
+
 
                         Nenhum ponto foi encontrado
                         para os critérios informados.
 
+
                     <?php elseif (count($points) === 1): ?>
+
 
                         1 ponto encontrado.
 
+
                     <?php else: ?>
+
 
                         <?= count($points) ?>
                         pontos encontrados.
 
+
                     <?php endif; ?>
 
+
                 </p>
+
             </header>
+
+
 
             <div class="collection-points-grid">
 
+
                 <?php foreach ($points as $point): ?>
+
 
                     <article class="collection-point-card">
 
                         <h3>
+
                             <?= htmlspecialchars(
                                 $point->name,
                                 ENT_QUOTES,
                                 'UTF-8'
                             ) ?>
+
                         </h3>
+
 
 
                         <p>
@@ -227,13 +371,16 @@ $points = $points ?? [];
 
                             <br>
 
+
                             <?= htmlspecialchars(
                                 $point->neighborhood,
                                 ENT_QUOTES,
                                 'UTF-8'
                             ) ?>
 
+
                             -
+
 
                             <?= htmlspecialchars(
                                 $point->city,
@@ -244,6 +391,7 @@ $points = $points ?? [];
                         </p>
 
 
+
                         <p>
 
                             <strong>
@@ -251,6 +399,7 @@ $points = $points ?? [];
                             </strong>
 
                             <br>
+
 
                             <?= htmlspecialchars(
                                 implode(
@@ -264,6 +413,7 @@ $points = $points ?? [];
                         </p>
 
 
+
                         <a
                             href="/pontos/<?= (int) $point->id ?>"
                         >
@@ -272,29 +422,92 @@ $points = $points ?? [];
 
                     </article>
 
+
                 <?php endforeach; ?>
 
+
             </div>
+
         </section>
 
     </main>
 
-    <footer class="site-footer">
-        <p>Recycle Here</p>
 
-        <nav aria-label="Navegação do rodapé">
+
+    <footer class="site-footer">
+
+        <p>
+            Recycle Here
+        </p>
+
+
+        <nav
+            aria-label="Navegação do rodapé"
+        >
+
             <ul class="footer-nav">
-                <li><a href="/">Início</a></li>
-                <li><a href="/pontos">Pontos de coleta</a></li>
-                <li><a href="/#materiais">Materiais</a></li>
-                <li><a href="/#empresas">Para empresas</a></li>
+
+                <li>
+                    <a href="/">
+                        Início
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="/pontos">
+                        Pontos de coleta
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="/#materiais">
+                        Materiais
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="/#empresas">
+                        Para empresas
+                    </a>
+                </li>
+
+
+                <?php if ($isCompanyLogged): ?>
+
+                    <li>
+                        <a href="/empresa/pontos">
+                            Meus pontos
+                        </a>
+                    </li>
+
+
+                <?php elseif ($isAdminLogged): ?>
+
+                    <li>
+                        <a href="/admin">
+                            Administração
+                        </a>
+                    </li>
+
+                <?php endif; ?>
+
             </ul>
+
         </nav>
 
-        <p>Projeto acadêmico - 2026</p>
+
+        <p>
+            Projeto acadêmico - 2026
+        </p>
+
     </footer>
 
+
     <script src="/assets/js/main.js"></script>
+
 </body>
 
 </html>
