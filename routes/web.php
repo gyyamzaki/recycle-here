@@ -98,3 +98,11 @@ $router->post(
         'update'
     ]
 );
+
+$router->post(
+    '/empresa/pontos/{id}/excluir',
+    [
+        CompanyPointController::class,
+        'destroy'
+    ]
+);

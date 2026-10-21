@@ -663,4 +663,122 @@ final class CollectionPointRepository
             throw $exception;
         }
     }
+
+    /**
+ * Exclui um ponto pertencente a uma empresa.
+ *
+ * A verificação do company_id impede que uma empresa
+ * exclua pontos pertencentes a outra empresa.
+ */
+public function deleteForCompany(
+        int $pointId,
+        int $companyId
+    ): bool {
+
+        try {
+
+            $this->connection->beginTransaction();
+
+
+            /*
+            * Confirma que o ponto existe
+            * e pertence à empresa autenticada.
+            */
+            $checkStatement =
+                $this->connection->prepare(
+                    '
+                        SELECT id
+                        FROM collection_points
+                        WHERE
+                            id = :id
+                            AND company_id = :company_id
+                        LIMIT 1
+                    '
+                );
+
+
+            $checkStatement->execute([
+                'id' => $pointId,
+                'company_id' => $companyId
+            ]);
+
+
+            if (!$checkStatement->fetch()) {
+
+                $this->connection->rollBack();
+
+                return false;
+            }
+
+
+            /*
+            * Remove primeiro as relações
+            * entre o ponto e os materiais.
+            */
+            $materialStatement =
+                $this->connection->prepare(
+                    '
+                        DELETE FROM collection_point_material
+                        WHERE collection_point_id = :point_id
+                    '
+                );
+
+
+            $materialStatement->execute([
+                'point_id' => $pointId
+            ]);
+
+
+            /*
+            * Exclui o ponto.
+            *
+            * O company_id permanece no WHERE
+            * como uma segunda proteção.
+            */
+            $pointStatement =
+                $this->connection->prepare(
+                    '
+                        DELETE FROM collection_points
+                        WHERE
+                            id = :id
+                            AND company_id = :company_id
+                    '
+                );
+
+
+            $pointStatement->execute([
+                'id' => $pointId,
+                'company_id' => $companyId
+            ]);
+
+
+            $deleted =
+                $pointStatement->rowCount() === 1;
+
+
+            if (!$deleted) {
+
+                $this->connection->rollBack();
+
+                return false;
+            }
+
+
+            $this->connection->commit();
+
+
+            return true;
+
+
+        } catch (\Throwable $exception) {
+
+            if ($this->connection->inTransaction()) {
+
+                $this->connection->rollBack();
+            }
+
+
+            throw $exception;
+        }
+    }
 }

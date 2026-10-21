@@ -59,32 +59,26 @@
             <ul class="nav-list">
 
                 <li>
-
                     <a href="/">
                         Início
                     </a>
-
                 </li>
 
 
                 <li>
-
                     <a href="/pontos">
                         Pontos de coleta
                     </a>
-
                 </li>
 
 
                 <li>
-
                     <a
                         href="/empresa/pontos"
                         aria-current="page"
                     >
                         Meus pontos
                     </a>
-
                 </li>
 
 
@@ -143,19 +137,15 @@
 
 
             <p>
-
                 Empresa:
 
                 <strong>
-
                     <?= htmlspecialchars(
                         $company->name,
                         ENT_QUOTES,
                         'UTF-8'
                     ) ?>
-
                 </strong>
-
             </p>
 
         </header>
@@ -197,7 +187,6 @@
 
             <?php if (empty($points)): ?>
 
-
                 <p>
                     Sua empresa ainda não possui
                     pontos de coleta cadastrados.
@@ -213,9 +202,7 @@
                     <?php foreach ($points as $point): ?>
 
 
-                        <article
-                            class="collection-point-card"
-                        >
+                        <article class="collection-point-card">
 
                             <h3>
 
@@ -273,7 +260,9 @@
                             </p>
 
 
-                            <p>
+
+                            <div class="point-card-actions">
+
 
                                 <a
                                     href="/pontos/<?= (int) $point->id ?>"
@@ -281,10 +270,6 @@
                                     Ver página pública
                                 </a>
 
-                            </p>
-
-
-                            <p>
 
                                 <a
                                     href="/empresa/pontos/<?= (int) $point->id ?>/editar"
@@ -292,7 +277,39 @@
                                     Editar
                                 </a>
 
-                            </p>
+
+                                <form
+                                    class="delete-point-form"
+                                    action="/empresa/pontos/<?= (int) $point->id ?>/excluir"
+                                    method="post"
+                                    data-point-name="<?= htmlspecialchars(
+                                        $point->name,
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ) ?>"
+                                >
+
+                                    <input
+                                        type="hidden"
+                                        name="_csrf"
+                                        value="<?= htmlspecialchars(
+                                            App\Core\Csrf::token(),
+                                            ENT_QUOTES,
+                                            'UTF-8'
+                                        ) ?>"
+                                    >
+
+                                    <button
+                                        class="button-danger"
+                                        type="submit"
+                                    >
+                                        Excluir
+                                    </button>
+
+                                </form>
+
+
+                            </div>
 
                         </article>
 
@@ -310,7 +327,56 @@
 
     </main>
 
+    <dialog
+        class="confirmation-modal"
+        id="delete-point-modal"
+        aria-labelledby="delete-modal-title"
+        aria-describedby="delete-modal-description"
+    >
 
+        <div class="confirmation-modal-content">
+
+            <div class="confirmation-modal-icon" aria-hidden="true">
+                !
+            </div>
+
+
+            <h2 id="delete-modal-title">
+                Excluir ponto de coleta?
+            </h2>
+
+
+            <p id="delete-modal-description">
+                Você está prestes a excluir
+                <strong id="delete-point-name"></strong>.
+                Esta ação não poderá ser desfeita.
+            </p>
+
+
+            <div class="confirmation-modal-actions">
+
+                <button
+                    class="button-secondary"
+                    id="cancel-delete-button"
+                    type="button"
+                >
+                    Cancelar
+                </button>
+
+
+                <button
+                    class="button-danger-filled"
+                    id="confirm-delete-button"
+                    type="button"
+                >
+                    Sim, excluir
+                </button>
+
+            </div>
+
+        </div>
+
+    </dialog>
 
     <footer class="site-footer">
 
@@ -326,29 +392,23 @@
             <ul class="footer-nav">
 
                 <li>
-
                     <a href="/">
                         Início
                     </a>
-
                 </li>
 
 
                 <li>
-
                     <a href="/pontos">
                         Pontos de coleta
                     </a>
-
                 </li>
 
 
                 <li>
-
                     <a href="/empresa/pontos">
                         Meus pontos
                     </a>
-
                 </li>
 
             </ul>

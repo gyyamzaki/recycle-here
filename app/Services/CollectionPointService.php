@@ -100,4 +100,20 @@ final class CollectionPointService
                 $data
             );
     }
+
+    /**
+     * Solicita a exclusão de um ponto
+     * pertencente à empresa autenticada.
+     */
+    public function deleteForCompany(
+        int $pointId,
+        int $companyId
+    ): bool {
+
+        return $this->repository
+            ->deleteForCompany(
+                $pointId,
+                $companyId
+            );
+    }
 }

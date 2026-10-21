@@ -1380,3 +1380,266 @@ a {
         padding: 1.25rem;
     }
 }
+
+/* ============================================================
+   AÇÕES DOS PONTOS DA EMPRESA
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   Agrupamento das ações
+------------------------------------------------------------ */
+
+.point-card-actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 0.75rem;
+
+    margin-top: 1rem;
+}
+
+
+.point-card-actions form {
+    margin: 0;
+}
+
+
+.point-card-actions a {
+    margin-top: 0;
+}
+
+
+/* ------------------------------------------------------------
+   Botão de exclusão
+------------------------------------------------------------ */
+
+.button-danger {
+    display: inline-block;
+
+    padding: 0.65rem 1rem;
+
+    font: inherit;
+    font-weight: 600;
+
+    color: #b91c1c;
+
+    background-color: #ffffff;
+
+    border: 1px solid #b91c1c;
+    border-radius: 0.5rem;
+
+    cursor: pointer;
+}
+
+
+.button-danger:hover {
+    color: #ffffff;
+
+    background-color: #b91c1c;
+}
+
+
+.button-danger:focus-visible {
+    outline: 3px solid #b91c1c;
+    outline-offset: 3px;
+}
+
+/* ============================================================
+   MODAL DE CONFIRMAÇÃO
+   ============================================================ */
+
+.confirmation-modal {
+    width: min(
+        calc(100% - 2rem),
+        30rem
+    );
+
+    padding: 0;
+
+    color: var(--color-text);
+
+    background: var(--color-background);
+
+    border: 0;
+    border-radius: 0.9rem;
+
+    box-shadow:
+        0 1.5rem 4rem
+        rgba(0, 0, 0, 0.25);
+}
+
+
+/*
+   Fundo escurecido atrás do modal.
+*/
+.confirmation-modal::backdrop {
+    background:
+        rgba(15, 23, 42, 0.55);
+}
+
+
+/* Conteúdo interno */
+
+.confirmation-modal-content {
+    padding: 2rem;
+
+    text-align: center;
+}
+
+
+/* Ícone de atenção */
+
+.confirmation-modal-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 3.5rem;
+    height: 3.5rem;
+
+    margin:
+        0 auto
+        1.25rem;
+
+    font-size: 1.6rem;
+    font-weight: 700;
+
+    color: #b91c1c;
+
+    background-color: #fef2f2;
+
+    border-radius: 50%;
+}
+
+
+/* Título */
+
+.confirmation-modal h2 {
+    margin:
+        0
+        0
+        0.75rem;
+
+    font-size: 1.5rem;
+    line-height: 1.3;
+}
+
+
+/* Descrição */
+
+.confirmation-modal p {
+    margin:
+        0
+        0
+        1.75rem;
+
+    color: var(--color-text-muted);
+}
+
+
+/* Nome do ponto */
+
+.confirmation-modal p strong {
+    color: var(--color-text);
+}
+
+
+/* Área dos botões */
+
+.confirmation-modal-actions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.75rem;
+}
+
+
+/* Botão cancelar */
+
+.button-secondary {
+    padding: 0.7rem 1.1rem;
+
+    font: inherit;
+    font-weight: 600;
+
+    color: var(--color-text);
+
+    background-color: var(--color-background);
+
+    border:
+        1px solid
+        var(--color-border);
+
+    border-radius: 0.5rem;
+
+    cursor: pointer;
+}
+
+
+.button-secondary:hover {
+    background-color:
+        var(--color-surface);
+}
+
+
+/* Botão vermelho de confirmação */
+
+.button-danger-filled {
+    padding: 0.7rem 1.1rem;
+
+    font: inherit;
+    font-weight: 600;
+
+    color: #ffffff;
+
+    background-color: #b91c1c;
+
+    border:
+        1px solid
+        #b91c1c;
+
+    border-radius: 0.5rem;
+
+    cursor: pointer;
+}
+
+
+.button-danger-filled:hover {
+    background-color: #991b1b;
+
+    border-color: #991b1b;
+}
+
+
+.button-secondary:focus-visible,
+.button-danger-filled:focus-visible {
+    outline:
+        3px solid
+        var(--color-primary);
+
+    outline-offset: 3px;
+}
+
+
+/* Desktop */
+
+@media (min-width: 36rem) {
+
+    .confirmation-modal-actions {
+        flex-direction: row;
+
+        justify-content: center;
+    }
+
+
+    .confirmation-modal-actions button {
+        min-width: 8rem;
+    }
+
+}
