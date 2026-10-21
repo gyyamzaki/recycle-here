@@ -1,3 +1,16 @@
+<?php
+
+$stats =
+    $stats ?? [];
+
+$companies =
+    $companies ?? [];
+
+$points =
+    $points ?? [];
+
+?>
+
 <!DOCTYPE html>
 
 <html lang="pt-BR">
@@ -13,7 +26,7 @@
 
     <meta
         name="description"
-        content="Área administrativa do Recycle Here."
+        content="Painel administrativo do Recycle Here."
     >
 
     <title>
@@ -30,263 +43,476 @@
 
 <body>
 
-    <header class="site-header">
+<header class="site-header">
 
-        <a
-            class="logo"
-            href="/"
-        >
-            Recycle Here
-        </a>
+    <a class="logo" href="/">
+        Recycle Here
+    </a>
 
 
-        <button
-            class="menu-button"
-            type="button"
-            aria-expanded="false"
-            aria-controls="main-navigation"
-        >
-            Menu
-        </button>
+    <button
+        class="menu-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="main-navigation"
+    >
+        Menu
+    </button>
 
 
-        <nav
-            class="site-nav"
-            id="main-navigation"
-            aria-label="Navegação administrativa"
-        >
+    <nav
+        class="site-nav"
+        id="main-navigation"
+        aria-label="Navegação administrativa"
+    >
 
-            <ul class="nav-list">
+        <ul class="nav-list">
 
-                <li>
-                    <a href="/">
-                        Início
-                    </a>
-                </li>
+            <li>
+                <a href="/">
+                    Início
+                </a>
+            </li>
 
+            <li>
+                <a href="/admin/empresas">
+                    Empresas
+                </a>
+            </li>
 
-                <li>
-                    <a href="/pontos">
-                        Pontos de coleta
-                    </a>
-                </li>
+            <li>
+                <a href="/admin/pontos">
+                    Pontos
+                </a>
+            </li>
 
+            <li>
+                <a
+                    href="/admin"
+                    aria-current="page"
+                >
+                    Dashboard
+                </a>
+            </li>
 
-                <li>
-                    <a
-                        href="/admin"
-                        aria-current="page"
+            <li>
+
+                <form
+                    class="nav-logout-form"
+                    action="/logout"
+                    method="post"
+                >
+
+                    <input
+                        type="hidden"
+                        name="_csrf"
+                        value="<?= htmlspecialchars(
+                            App\Core\Csrf::token(),
+                            ENT_QUOTES,
+                            'UTF-8'
+                        ) ?>"
                     >
-                        Administração
-                    </a>
-                </li>
 
-
-                <li>
-
-                    <form
-                        class="nav-logout-form"
-                        action="/logout"
-                        method="post"
+                    <button
+                        class="nav-logout-button"
+                        type="submit"
                     >
+                        Sair
+                    </button>
 
-                        <input
-                            type="hidden"
-                            name="_csrf"
-                            value="<?= htmlspecialchars(
-                                App\Core\Csrf::token(),
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>"
-                        >
+                </form>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
 
 
-                        <button
-                            class="nav-logout-button"
-                            type="submit"
-                        >
-                            Sair
-                        </button>
 
-                    </form>
+<main class="admin-page">
 
-                </li>
 
-            </ul>
+    <header class="admin-page-header">
 
-        </nav>
+        <p class="admin-eyebrow">
+            Administração
+        </p>
+
+
+        <h1>
+            Painel administrativo
+        </h1>
+
+
+        <p>
+
+            Olá,
+
+            <strong>
+                <?= htmlspecialchars(
+                    (string) (
+                        $user['name']
+                        ??
+                        'Administrador'
+                    ),
+                    ENT_QUOTES,
+                    'UTF-8'
+                ) ?>
+            </strong>.
+
+            Aqui você acompanha o funcionamento
+            do Recycle Here.
+
+        </p>
 
     </header>
 
 
 
-    <main class="points-page">
+    <section
+        class="admin-summary"
+        aria-label="Resumo do sistema"
+    >
+
+        <article class="admin-summary-card">
+
+            <span class="admin-summary-label">
+                Empresas
+            </span>
+
+            <strong class="admin-summary-value">
+                <?= (int) (
+                    $stats['total_companies']
+                    ??
+                    0
+                ) ?>
+            </strong>
+
+            <span class="admin-summary-description">
+                cadastradas
+            </span>
+
+        </article>
+
+
+        <article class="admin-summary-card">
+
+            <span class="admin-summary-label">
+                Empresas ativas
+            </span>
+
+            <strong class="admin-summary-value">
+                <?= (int) (
+                    $stats['active_companies']
+                    ??
+                    0
+                ) ?>
+            </strong>
+
+            <span class="admin-summary-description">
+                liberadas
+            </span>
+
+        </article>
+
+
+        <article class="admin-summary-card">
+
+            <span class="admin-summary-label">
+                Pontos
+            </span>
+
+            <strong class="admin-summary-value">
+                <?= (int) (
+                    $stats['total_points']
+                    ??
+                    0
+                ) ?>
+            </strong>
+
+            <span class="admin-summary-description">
+                cadastrados
+            </span>
+
+        </article>
+
+
+        <article class="admin-summary-card">
+
+            <span class="admin-summary-label">
+                Pontos ativos
+            </span>
+
+            <strong class="admin-summary-value">
+                <?= (int) (
+                    $stats['active_points']
+                    ??
+                    0
+                ) ?>
+            </strong>
+
+            <span class="admin-summary-description">
+                publicados
+            </span>
+
+        </article>
+
+    </section>
+
+
+
+    <div class="admin-dashboard-links">
 
         <a
-            class="back-link"
-            href="/"
+            class="admin-dashboard-link"
+            href="/admin/empresas"
         >
-            Voltar para a página inicial
+
+            <strong>
+                Gerenciar empresas
+            </strong>
+
+            <span>
+                Consultar empresas, dados,
+                pontos e status.
+            </span>
+
         </a>
 
 
-        <header class="points-page-header">
+        <a
+            class="admin-dashboard-link"
+            href="/admin/pontos"
+        >
 
-            <h1>
-                Área administrativa
-            </h1>
+            <strong>
+                Gerenciar pontos
+            </strong>
 
+            <span>
+                Consultar todos os pontos
+                e controlar sua disponibilidade.
+            </span>
+
+        </a>
+
+    </div>
+
+
+
+    <section class="admin-section">
+
+        <header class="section-header">
+
+            <h2>
+                Empresas
+            </h2>
 
             <p>
-
-                Olá,
-
-                <strong>
-                    <?= htmlspecialchars(
-                        (string) ($user['name'] ?? 'Administrador'),
-                        ENT_QUOTES,
-                        'UTF-8'
-                    ) ?>
-                </strong>.
-
-                Você está autenticado como administrador.
-
+                Prévia das empresas cadastradas.
             </p>
 
         </header>
 
 
+        <?php if (empty($companies)): ?>
 
-        <section
-            class="search-results"
-            aria-labelledby="admin-options-title"
-        >
+            <p>
+                Nenhuma empresa cadastrada.
+            </p>
 
-            <header class="section-header">
+        <?php else: ?>
 
-                <h2 id="admin-options-title">
-                    Administração do sistema
-                </h2>
+            <div class="admin-list">
 
+                <?php foreach (
+                    $companies
+                    as $company
+                ): ?>
 
-                <p>
-                    Esta área reúne as funcionalidades
-                    exclusivas do administrador.
-                </p>
+                    <article class="admin-list-card">
 
-            </header>
+                        <div>
 
+                            <h3>
 
-            <div class="collection-points-grid">
+                                <?= htmlspecialchars(
+                                    $company['name'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
 
+                            </h3>
 
-                <article class="collection-point-card">
+                            <p>
 
-                    <h3>
-                        Empresas
-                    </h3>
+                                <?= htmlspecialchars(
+                                    $company['email'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
 
-                    <p>
-                        Gerenciamento das empresas
-                        cadastradas na plataforma.
-                    </p>
+                            </p>
 
-                    <p>
-                        Funcionalidade administrativa
-                        que será implementada na próxima etapa.
-                    </p>
-
-                </article>
-
+                        </div>
 
 
-                <article class="collection-point-card">
+                        <a
+                            href="/admin/empresas/<?= (int) $company['id'] ?>"
+                        >
+                            Ver detalhes
+                        </a>
 
-                    <h3>
-                        Pontos de coleta
-                    </h3>
+                    </article>
 
-                    <p>
-                        Consulta administrativa dos pontos
-                        cadastrados pelas empresas.
-                    </p>
-
-                    <a href="/pontos">
-                        Ver pontos
-                    </a>
-
-                </article>
-
-
-
-                <article class="collection-point-card">
-
-                    <h3>
-                        Sistema
-                    </h3>
-
-                    <p>
-                        Área reservada para recursos
-                        administrativos do Recycle Here.
-                    </p>
-
-                </article>
-
+                <?php endforeach; ?>
 
             </div>
 
-        </section>
-
-    </main>
-
-
-
-    <footer class="site-footer">
-
-        <p>
-            Recycle Here
-        </p>
-
-
-        <nav
-            aria-label="Navegação do rodapé"
-        >
-
-            <ul class="footer-nav">
-
-                <li>
-                    <a href="/">
-                        Início
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="/pontos">
-                        Pontos de coleta
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="/admin">
-                        Administração
-                    </a>
-                </li>
-
-            </ul>
-
-        </nav>
+        <?php endif; ?>
 
 
         <p>
-            Projeto acadêmico - 2026
+
+            <a
+                class="button-primary"
+                href="/admin/empresas"
+            >
+                Ver todas as empresas
+            </a>
+
         </p>
 
-    </footer>
+    </section>
 
 
-    <script src="/assets/js/main.js"></script>
+
+    <section class="admin-section">
+
+        <header class="section-header">
+
+            <h2>
+                Pontos de coleta
+            </h2>
+
+            <p>
+                Prévia dos pontos cadastrados.
+            </p>
+
+        </header>
+
+
+        <?php if (empty($points)): ?>
+
+            <p>
+                Nenhum ponto cadastrado.
+            </p>
+
+        <?php else: ?>
+
+            <div class="admin-list">
+
+                <?php foreach (
+                    $points
+                    as $point
+                ): ?>
+
+                    <article class="admin-list-card">
+
+                        <div>
+
+                            <h3>
+
+                                <?= htmlspecialchars(
+                                    $point['name'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+
+                            </h3>
+
+                            <p>
+
+                                <?= htmlspecialchars(
+                                    $point['company_name'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="/admin/pontos/<?= (int) $point['id'] ?>"
+                        >
+                            Ver detalhes
+                        </a>
+
+                    </article>
+
+                <?php endforeach; ?>
+
+            </div>
+
+        <?php endif; ?>
+
+
+        <p>
+
+            <a
+                class="button-primary"
+                href="/admin/pontos"
+            >
+                Ver todos os pontos
+            </a>
+
+        </p>
+
+    </section>
+
+</main>
+
+
+
+<footer class="site-footer">
+
+    <p>
+        Recycle Here
+    </p>
+
+    <nav aria-label="Navegação do rodapé">
+
+        <ul class="footer-nav">
+
+            <li>
+                <a href="/">
+                    Início
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin">
+                    Administração
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <p>
+        Projeto acadêmico - 2026
+    </p>
+
+</footer>
+
+
+<script src="/assets/js/main.js"></script>
 
 </body>
 

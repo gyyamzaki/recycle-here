@@ -108,10 +108,70 @@ $router->post(
     ]
 );
 
+/*
+|--------------------------------------------------------------------------
+| Administração
+|--------------------------------------------------------------------------
+*/
+
 $router->get(
     '/admin',
     [
         AdminController::class,
         'index'
+    ]
+);
+
+
+$router->get(
+    '/admin/empresas',
+    [
+        AdminController::class,
+        'companies'
+    ]
+);
+
+
+$router->get(
+    '/admin/empresas/{id}',
+    [
+        AdminController::class,
+        'companyShow'
+    ]
+);
+
+
+$router->post(
+    '/admin/empresas/{id}/status',
+    [
+        AdminController::class,
+        'companyStatus'
+    ]
+);
+
+
+$router->get(
+    '/admin/pontos',
+    [
+        AdminController::class,
+        'points'
+    ]
+);
+
+
+$router->get(
+    '/admin/pontos/{id}',
+    [
+        AdminController::class,
+        'pointShow'
+    ]
+);
+
+
+$router->post(
+    '/admin/pontos/{id}/status',
+    [
+        AdminController::class,
+        'pointStatus'
     ]
 );
