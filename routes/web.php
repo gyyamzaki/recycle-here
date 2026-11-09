@@ -58,15 +58,6 @@ $router->get(
 );
 
 $router->get(
-    '/empresa/pontos',
-    [
-        CompanyPointController::class,
-        'index'
-    ]
-);
-
-
-$router->get(
     '/empresa/pontos/novo',
     [
         CompanyPointController::class,

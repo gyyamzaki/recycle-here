@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 use App\Core\Request;
 use App\Core\Router;
+use App\Core\ErrorHandler;
 
 
 /*
@@ -50,6 +51,8 @@ if (PHP_SAPI === 'cli-server') {
 require_once dirname(__DIR__)
     . '/config/bootstrap.php';
 
+    
+ErrorHandler::register();
 
 /*
 |--------------------------------------------------------------------------

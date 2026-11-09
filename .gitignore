@@ -1,6 +1,8 @@
 /vendor/
 /.env
-/storage/logs/*.log
 
 /_mvc_test_backup/
 /frontend/
+
+/storage/logs/*.log
+!/storage/logs/.gitkeep

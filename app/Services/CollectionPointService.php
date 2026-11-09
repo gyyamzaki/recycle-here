@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Models\CollectionPoint;
 use App\Repositories\CollectionPointRepository;
+use App\Core\Logger;
 
 final class CollectionPointService
 {
@@ -57,11 +58,32 @@ final class CollectionPointService
         array $data
     ): int {
 
-        return $this->repository
-            ->createWithMaterials(
-                $companyId,
-                $data
-            );
+        $pointId =
+            $this->repository
+                ->createWithMaterials(
+                    $companyId,
+                    $data
+                );
+
+
+        Logger::info(
+            'collection_point_created',
+            [
+                'point_id' =>
+                    $pointId,
+
+                'company_id' =>
+                    $companyId,
+
+                'point_name' =>
+                    $data['name']
+                    ??
+                    null
+            ]
+        );
+
+
+        return $pointId;
     }
 
     public function findForCompany(

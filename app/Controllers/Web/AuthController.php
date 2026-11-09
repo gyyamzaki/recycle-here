@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers\Web;
 
 use App\Core\Csrf;
+use App\Core\Logger;
 use App\Core\Request;
 use App\Core\Response;
 use App\Core\Session;
@@ -31,7 +32,16 @@ final class AuthController
         Request $request
     ): void {
 
+        if (
+            $this->redirectAuthenticatedUser()
+        ) {
+
+            return;
+        }
+
+
         $errors = [];
+
 
         require dirname(__DIR__, 2)
             . '/Views/auth/login.php';
@@ -42,9 +52,6 @@ final class AuthController
         Request $request
     ): void {
 
-        /*
-         * Proteção CSRF.
-         */
         if (
             !Csrf::validate(
                 $request->input('_csrf')
@@ -53,15 +60,13 @@ final class AuthController
 
             Response::status(403);
 
-            echo 'Requisição inválida.';
+            require dirname(__DIR__, 2)
+                . '/Views/errors/403.php';
 
             return;
         }
 
 
-        /*
-         * Validação dos dados recebidos.
-         */
         $validation =
             $this->validator
                 ->validateLogin(
@@ -88,9 +93,6 @@ final class AuthController
             $validation['data'];
 
 
-        /*
-         * Verifica e-mail e senha.
-         */
         if (
             !$this->authService->login(
                 $data['email'],
@@ -98,7 +100,21 @@ final class AuthController
             )
         ) {
 
+            /*
+             * Log de tentativa de login
+             * com credenciais inválidas.
+             */
+            Logger::warning(
+                'login_failed',
+                [
+                    'email' =>
+                        $data['email']
+                ]
+            );
+
+
             Response::status(401);
+
 
             $errors['login'] =
                 'E-mail ou senha inválidos.';
@@ -112,21 +128,51 @@ final class AuthController
 
 
         /*
-         * Após login bem-sucedido,
-         * identifica o perfil salvo na sessão.
+         * Usuário que acabou de ser
+         * autenticado.
          */
         $user =
             Session::get('user');
 
 
         /*
-         * Administrador vai para
-         * a área administrativa.
+         * Log de autenticação bem-sucedida.
+         *
+         * Senha nunca é registrada.
+         */
+        if (is_array($user)) {
+
+            Logger::info(
+                'login_success',
+                [
+                    'user_id' =>
+                        $user['id']
+                        ??
+                        null,
+
+                    'email' =>
+                        $user['email']
+                        ??
+                        null,
+
+                    'role' =>
+                        $user['role']
+                        ??
+                        null
+                ]
+            );
+        }
+
+
+        /*
+         * Admin vai para sua área.
          */
         if (
             is_array($user)
             &&
-            ($user['role'] ?? null) === 'admin'
+            ($user['role'] ?? null)
+                ===
+                'admin'
         ) {
 
             Response::redirect(
@@ -138,8 +184,8 @@ final class AuthController
 
 
         /*
-         * Empresa vai para a área
-         * de gerenciamento de pontos.
+         * Empresa vai para gerenciamento
+         * dos próprios pontos.
          */
         Response::redirect(
             '/empresa/pontos'
@@ -151,7 +197,16 @@ final class AuthController
         Request $request
     ): void {
 
+        if (
+            $this->redirectAuthenticatedUser()
+        ) {
+
+            return;
+        }
+
+
         $errors = [];
+
 
         require dirname(__DIR__, 2)
             . '/Views/auth/register.php';
@@ -162,9 +217,6 @@ final class AuthController
         Request $request
     ): void {
 
-        /*
-         * Proteção CSRF.
-         */
         if (
             !Csrf::validate(
                 $request->input('_csrf')
@@ -173,15 +225,13 @@ final class AuthController
 
             Response::status(403);
 
-            echo 'Requisição inválida.';
+            require dirname(__DIR__, 2)
+                . '/Views/errors/403.php';
 
             return;
         }
 
 
-        /*
-         * Validação do cadastro.
-         */
         $validation =
             $this->validator
                 ->validateRegister(
@@ -204,10 +254,6 @@ final class AuthController
         }
 
 
-        /*
-         * Cadastro público sempre cria
-         * usuário do perfil company.
-         */
         $result =
             $this->authService
                 ->registerCompany(
@@ -240,9 +286,6 @@ final class AuthController
         Request $request
     ): void {
 
-        /*
-         * Logout também exige CSRF.
-         */
         if (
             !Csrf::validate(
                 $request->input('_csrf')
@@ -251,7 +294,8 @@ final class AuthController
 
             Response::status(403);
 
-            echo 'Requisição inválida.';
+            require dirname(__DIR__, 2)
+                . '/Views/errors/403.php';
 
             return;
         }
@@ -265,5 +309,46 @@ final class AuthController
             '/'
         );
     }
-}
 
+
+    private function redirectAuthenticatedUser(): bool
+    {
+        $user =
+            Session::get('user');
+
+
+        if (!is_array($user)) {
+
+            return false;
+        }
+
+
+        $role =
+            $user['role']
+            ??
+            null;
+
+
+        if ($role === 'admin') {
+
+            Response::redirect(
+                '/admin'
+            );
+
+            return true;
+        }
+
+
+        if ($role === 'company') {
+
+            Response::redirect(
+                '/empresa/pontos'
+            );
+
+            return true;
+        }
+
+
+        return false;
+    }
+}
