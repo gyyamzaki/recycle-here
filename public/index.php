@@ -51,7 +51,7 @@ if (PHP_SAPI === 'cli-server') {
 require_once dirname(__DIR__)
     . '/config/bootstrap.php';
 
-    
+
 ErrorHandler::register();
 
 /*
@@ -73,6 +73,9 @@ $router = new Router();
 
 require dirname(__DIR__)
     . '/routes/web.php';
+
+require dirname(__DIR__)
+    . '/routes/api.php';
 
 
 /*

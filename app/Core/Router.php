@@ -11,14 +11,12 @@ final class Router
 {
     private array $routes = [];
 
-
     public function get(
         string $path,
         array|Closure $handler
     ): void {
         $this->add('GET', $path, $handler);
     }
-
 
     public function post(
         string $path,
@@ -27,7 +25,6 @@ final class Router
         $this->add('POST', $path, $handler);
     }
 
-
     public function put(
         string $path,
         array|Closure $handler
@@ -35,14 +32,12 @@ final class Router
         $this->add('PUT', $path, $handler);
     }
 
-
     public function delete(
         string $path,
         array|Closure $handler
     ): void {
         $this->add('DELETE', $path, $handler);
     }
-
 
     private function add(
         string $method,
@@ -56,18 +51,24 @@ final class Router
         ];
     }
 
+    public function dispatch(
+        Request $request
+    ): void {
 
-    public function dispatch(Request $request): void
-    {
         foreach ($this->routes as $route) {
 
-            if ($route['method'] !== $request->method()) {
+            if (
+                $route['method']
+                !==
+                $request->method()
+            ) {
                 continue;
             }
 
-            $pattern = $this->createPattern(
-                $route['path']
-            );
+            $pattern =
+                $this->createPattern(
+                    $route['path']
+                );
 
             if (
                 !preg_match(
@@ -81,8 +82,10 @@ final class Router
 
             $parameters = [];
 
-            foreach ($matches as $key => $value) {
-
+            foreach (
+                $matches
+                as $key => $value
+            ) {
                 if (is_string($key)) {
                     $parameters[] = $value;
                 }
@@ -97,18 +100,34 @@ final class Router
             return;
         }
 
-        http_response_code(404);
+        if (
+            str_starts_with(
+                $request->path(),
+                '/api'
+            )
+        ) {
+            Response::json(
+                [
+                    'error' => [
+                        'status' => 404,
+                        'message' =>
+                            'Endpoint não encontrado.'
+                    ]
+                ],
+                404
+            );
+        }
 
-        echo '<h1>404</h1>';
         Response::status(404);
 
         require dirname(__DIR__)
             . '/Views/errors/404.php';
     }
 
+    private function createPattern(
+        string $path
+    ): string {
 
-    private function createPattern(string $path): string
-    {
         $pattern = preg_replace(
             '/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/',
             '(?P<$1>[^/]+)',
@@ -118,14 +137,13 @@ final class Router
         return '#^' . $pattern . '$#';
     }
 
-
     private function execute(
         array|Closure $handler,
         Request $request,
         array $parameters
     ): void {
-        if ($handler instanceof Closure) {
 
+        if ($handler instanceof Closure) {
             $handler(
                 $request,
                 ...$parameters
@@ -134,9 +152,8 @@ final class Router
             return;
         }
 
-
-        [$controllerClass, $method] = $handler;
-
+        [$controllerClass, $method] =
+            $handler;
 
         if (!class_exists($controllerClass)) {
             throw new RuntimeException(
@@ -144,16 +161,19 @@ final class Router
             );
         }
 
+        $controller =
+            new $controllerClass();
 
-        $controller = new $controllerClass();
-
-
-        if (!method_exists($controller, $method)) {
+        if (
+            !method_exists(
+                $controller,
+                $method
+            )
+        ) {
             throw new RuntimeException(
                 "Método {$method} não encontrado."
             );
         }
-
 
         $controller->{$method}(
             $request,
