@@ -3,6 +3,9 @@
 
 /_mvc_test_backup/
 /frontend/
+/old_frontend/
+/github.txt
+/cookies.txt
 
 /storage/logs/*.log
 !/storage/logs/.gitkeep
