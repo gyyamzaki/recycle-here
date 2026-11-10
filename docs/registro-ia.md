@@ -1,6 +1,8 @@
 # Registro de uso de IA
 
-Este documento registra o uso de ferramentas de Inteligência Artificial durante o desenvolvimento do projeto Recycle Here.
+Este documento registra o uso de ferramentas de Inteligência Artificial como apoio durante o desenvolvimento do projeto **Recycle Here**.
+
+---
 
 ## 18/09/2026
 
@@ -8,37 +10,110 @@ Este documento registra o uso de ferramentas de Inteligência Artificial durante
 ChatGPT
 
 ### Finalidade
-Auxílio no planejamento inicial do projeto e na organização do processo de desenvolvimento.
+Apoio no planejamento inicial do projeto, levantamento dos requisitos, organização das páginas e definição do fluxo de navegação e dos primeiros wireframes.
 
-### Uso realizado
-A IA foi utilizada para auxiliar na: 
-
-Analise da melhor forma a se desenvolver o projeto visando a melhor estruturação do site que será desenvolvido na materia pensando nos requisitos necessarios, planejamento das paginas e elaboração do fluxo de navegação planejamento inicial dos wireframes 
-
+---
 
 ## 21/09/2026
 
-### Ferramente
+### Ferramenta
 ChatGPT
 
 ### Finalidade
-Auxiliar na Responsividade entre diferentes dispoisitivos
+Auxílio na revisão da responsividade da interface, principalmente na utilização da abordagem mobile first e na adaptação do layout para diferentes tamanhos de tela.
 
-### Uso realizado 
-A IA foi utilizada para auxilixiar na:
-
-Busca da melhor forma de melhorar a responsividade indicando que a melhor aboradgem seria fazer um site mobile first e editando an interface do site conforme a quantidade de pixels presente na tela
-
+---
 
 ## 22/09/2026
 
-### Ferramente
+### Ferramenta
 ChatGPT
 
 ### Finalidade
-Auxiliar na Construção da logica de demonstração de pontos especificos de acordo com os filtros aplicados 
+Apoio na elaboração e revisão da lógica em JavaScript utilizada nos filtros dos pontos de coleta e na exibição das informações do ponto selecionado.
 
-### Uso realizado 
-A IA foi utilizada para auxilixiar na:
+---
 
-Criação da logica com javaScript para a exibição de pontos de coleta de acordo com os filtros aplicados pelo usuario e exibição das informações corretas do Ponto selecionado na pagina exclusiva dos dados completos dos pontos de coleta
+## 26/09/2026
+
+### Ferramenta
+ChatGPT
+
+### Finalidade
+Auxílio na revisão da primeira etapa do projeto, com sugestões relacionadas à organização do código, acessibilidade, documentação e estrutura do repositório.
+
+---
+
+## 14/10/2026
+
+### Ferramenta
+ChatGPT
+
+### Finalidade
+Apoio no estudo e organização da transição do projeto para PHP, incluindo orientações sobre arquitetura MVC, separação de responsabilidades e estruturação das pastas da aplicação.
+
+---
+
+## 15/10/2026
+
+### Ferramenta
+ChatGPT
+
+### Finalidade
+Auxílio na modelagem inicial do banco de dados e no esclarecimento de dúvidas relacionadas a PDO, consultas parametrizadas, autenticação, sessões e armazenamento seguro de senhas.
+
+---
+
+## 17/10/2026
+
+### Ferramenta
+ChatGPT
+
+### Finalidade
+Apoio durante o desenvolvimento da área das empresas, principalmente na revisão do fluxo de cadastro de pontos, validação dos formulários e proteção CSRF.
+
+---
+
+## 18/10/2026
+
+### Ferramenta
+ChatGPT
+
+### Finalidade
+Auxílio na revisão do processo de edição dos pontos de coleta e na implementação das regras para garantir que cada empresa possa gerenciar somente seus próprios pontos.
+
+---
+
+## 21/10/2026
+
+### Ferramenta
+ChatGPT
+
+### Finalidade
+Apoio na revisão do CRUD de pontos e na organização das regras de acesso dos perfis de empresa e administrador, incluindo o funcionamento da área administrativa.
+
+---
+
+## 09/11/2026
+
+### Ferramenta
+ChatGPT
+
+### Finalidade
+Auxílio na revisão e implementação de recursos complementares do backend, incluindo logs, tratamento de erros, API REST e criação de testes automatizados para as principais validações.
+
+---
+
+## 10/11/2026
+
+### Ferramenta
+ChatGPT
+
+### Finalidade
+Apoio na etapa final do projeto, incluindo orientação para testes de segurança, revisão da documentação, organização do repositório e conferência dos requisitos antes da entrega.
+
+---
+
+## Considerações finais
+
+A ferramenta foi utilizada principalmente como apoio para esclarecer dúvidas, revisar alternativas de implementação e auxiliar na identificação de possíveis melhorias ao longo do desenvolvimento. As sugestões utilizadas foram analisadas e testadas durante a construção do projeto.
