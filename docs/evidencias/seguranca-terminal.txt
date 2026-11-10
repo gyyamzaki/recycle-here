@@ -1,0 +1,54 @@
+RECYCLE HERE - EVIDÊNCIAS DE SEGURANÇA
+======================================
+
+1) SQL INJECTION - BAIRRO
+Payload: ' OR 1=1 --
+
+Retorno:
+{
+    "data": [],
+    "meta": {
+        "count": 0,
+        "filters": {
+            "bairro": "' OR 1=1 --",
+            "material": ""
+        }
+    }
+}
+
+Resultado: PASSOU - o payload foi tratado como valor de filtro e não como SQL.
+
+
+2) SQL INJECTION - MATERIAL
+Payload: ' OR 1=1 --
+
+Retorno:
+{"error":{"status":400,"message":"Filtros de pesquisa inválidos.","details":{"material":"O material informado é inválido."}}}
+
+Resultado: PASSOU - entrada recusada pela validação.
+
+
+3) CSRF
+Operação: POST autenticado em /api/pontos sem X-CSRF-Token.
+
+Retorno:
+{"error":{"status":403,"message":"Token CSRF inválido ou ausente."}}
+
+Resultado: PASSOU - operação de escrita recusada sem token CSRF.
+
+
+4) OWNERSHIP
+Operação: empresa autenticada (empresa 2) tentando DELETE /api/pontos/1, recurso pertencente a outra empresa.
+
+Retorno:
+{"error":{"status":404,"message":"Ponto de coleta não encontrado."}}
+
+Resultado: PASSOU - recurso de outra empresa não pode ser alterado/excluído.
+
+
+5) TESTES AUTOMATIZADOS
+Tests: 10
+Passed: 10
+Failed: 0
+
+Resultado: PASSOU.
